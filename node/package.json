@@ -1,0 +1,23 @@
+{
+  "name": "battleship-node",
+  "version": "1.0.0",
+  "description": "Battleship game using Express.js and Socket.IO",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "battleship",
+    "node",
+    "js"
+  ],
+  "author": "Gabriel Trompiz",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
