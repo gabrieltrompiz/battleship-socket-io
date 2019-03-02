@@ -1,0 +1,56 @@
+.menuBtn {
+	width: 33vw;
+	height: 10vh;
+	margin-bottom: 2vh;
+	margin-left: 10px;
+	border-radius: 10px;
+	border-bottom-color: white;
+	border: none;
+	font-family: arial narrow;
+	font-size: 20px;
+	color: white;
+	background-color: rgb(70, 70, 70);
+	cursor: pointer;
+	outline: none;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+#menuCtn {
+	width: 35vw;
+	height: 48vh;
+	background-color: rgb(50, 50, 50);
+	border-radius: 20px;
+}
+
+#container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	background-color: rgba(10, 10, 70, 0.6);
+	justify-content: center;
+	align-items: center;
+}
+
+#title {
+	font-size: 30px;
+	font-family: arial narrow;
+	font-weight: bold;
+	color: white;
+}
+
+#titleContainer {
+	width: inherit;
+	height: 4vw;
+	background-color: rgb(50, 50, 50);
+	display: flex;
+	margin-top: 1vh;
+	justify-content: center;
+	align-items: center;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+#RoomList {
+
+}
