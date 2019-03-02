@@ -1,9 +1,39 @@
 const app = require('express')()
-const server = require('http').Server(app)
-const io = require('socket.io')
+const server = app.listen(8080)
+const io = require('socket.io').listen(server)
 
-server.listen(8080)
+let rooms = {}
 
-app.get('/', (req, res) => {
-    res.send(200, '<button>START BAROLCHI</button>')
+io.on('connection', socket => {
+    console.log('User connected')
+
+    socket.on('getRooms', () => {
+        socket.emit('returnRooms', rooms)
+    })
+
+    socket.on('joinRoom', room => {
+        if(rooms.hasOwnProperty(room)) { // if room exists
+            if(rooms[room].length < 2) { // if room already has two players
+                socket.join(room)
+                rooms = io.sockets.adapter.rooms
+            }
+            else socket.emit('errorJoining', "Room full. Wait until game is finished.")
+            
+        } 
+        else socket.emit('errorJoining', 'Room doesn\'t exists')
+        
+    })
+
+    socket.on('createRoom', room => {
+        if(!rooms.hasOwnProperty(room)) { // if room doesn't exists
+            socket.join(room)
+            rooms = io.sockets.adapter.rooms
+        }
+        else socket.emit('errorCreating', 'Room already exists')
+        
+    })
+    socket.on('disconnect', () => {
+        socket.leaveAll()
+    })
 })
+
