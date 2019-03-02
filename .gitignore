@@ -2,4 +2,3 @@ node/node_modules
 node/package-lock.json
 react-app/node_modules
 react-app/package-lock.json
-node/test.html
