@@ -2,8 +2,4 @@ node/node_modules
 node/package-lock.json
 react-app/node_modules
 react-app/package-lock.json
-<<<<<<< Updated upstream
-react-app/yarn.lock
-=======
 node/test.html
->>>>>>> Stashed changes
