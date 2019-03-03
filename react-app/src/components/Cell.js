@@ -7,22 +7,24 @@ export default class Cell extends React.Component {
     }
 
     render() {
-        const color = this.props.shot ? 'red' : 'white'
-        const isTop = this.props.coord.charAt(0) === 'A'
-        const isLeft = this.props.coord.split(this.props.coord.charAt(0))[1] === '1'
+        const color = this.props.shot ? 'red' : 'white';
+        const isTop = this.props.coord.charAt(0) === 'A';
+        const isLeft = this.props.coord.split(this.props.coord.charAt(0))[1] === '1';
         const styleTop = {
             fontFamily: "'Press Start 2P', cursive", 
             fontSize: '1vw', 
             textAlign: 'center',
             paddingLeft: this.props.coord === 'A1' ? '2vw' : 0
-        }
+        };
+
         const styleLeft = {
             fontFamily: "'Press Start 2P', cursive", 
             fontSize: '1vw', 
             textAlign: 'center',
             paddingTop: '1vw',
             paddingRight: '1vw'
-        }
+        };
+
         return(
             <div>
                 {isTop && <p style={styleTop}>{this.props.coord.split(this.props.coord.charAt(0))}</p>}     

@@ -13,9 +13,9 @@ export default class Menu extends React.Component {
 			<div>
 				<div id='titleContainer'><p id='title'>SUPER<br />BATTLESHIP</p></div>
 				<div id='menuCtn'>
-					<button className='menuBtn' style={{marginTop: 20}}>Create Room</button><br></br>
-					<button className='menuBtn' onClick={() => this.props.changeView('RoomList')}>Join Room</button><br></br>
-					<button className='menuBtn'>Help</button><br></br>
+					<button className='menuBtn' style={{marginTop: 20}} onClick={() => this.props.createRoom()}>Create Room</button><br></br>
+					<button className='menuBtn' onClick={() => this.props.roomRequest()}>Join Room</button><br></br>
+					<button className='menuBtn' onClick={() => this.props.changeView('Help')}>Help</button><br></br>
 				</div>
 			</div>
 		);
