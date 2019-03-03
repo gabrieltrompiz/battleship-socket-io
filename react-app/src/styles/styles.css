@@ -6,7 +6,7 @@
 	border-radius: 10px;
 	border-bottom-color: white;
 	border: none;
-	font-family: arial narrow;
+	font-family: 'Press Start 2P', cursive;
 	font-size: 20px;
 	color: white;
 	background-color: rgb(70, 70, 70);
@@ -21,34 +21,32 @@
 	height: 48vh;
 	background-color: rgb(50, 50, 50);
 	border-radius: 20px;
+	margin: 0 auto;
 }
 
 #container {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
-	background-color: rgba(10, 10, 70, 0.6);
 	justify-content: center;
 	align-items: center;
+	background-image: url('../assets/bg.png');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 #title {
-	font-size: 30px;
-	font-family: arial narrow;
+	font-size: 60px;
+	font-family: 'Press Start 2P', cursive;
 	font-weight: bold;
-	color: white;
+	background: -webkit-linear-gradient(red, yellow);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;	
 }
 
 #titleContainer {
-	width: inherit;
-	height: 4vw;
-	background-color: rgb(50, 50, 50);
-	display: flex;
-	margin-top: 1vh;
-	justify-content: center;
-	align-items: center;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+	width: 100vw;
+	text-align: center;
 }
 
 #RoomList {
