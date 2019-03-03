@@ -75,15 +75,18 @@ td {
 	padding-bottom: 35vh;
 }
 
-#gameCtn {
+#gameTables {
+	display: flex;
 	width: inherit;
 	height: inherit;
 	background-color: blue;
 	position: absolute;
 }
 
-#gameDiv {
-
+.gameDiv {
+	display: flex;
+	margin-left: 1vw;
+	margin-top: 1vw;
 }
 
 #gameTable {
@@ -95,7 +98,7 @@ td {
 }
 
 #dp2 {
-
+	margin-left: 2vw;
 }
 
 #p1 {
@@ -107,7 +110,11 @@ td {
 }
 
 #chat {
-
+	height: 92vh;
+	width: 30vw;
+	background-color: white;
+	margin-top: 4vh;
+	margin-left: 3vw;
 }
 
 #battleships {

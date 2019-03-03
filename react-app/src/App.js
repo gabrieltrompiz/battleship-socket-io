@@ -9,7 +9,7 @@ import GameSpectator from './views/GameSpectator';
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {view: 'Menu'};
+        this.state = {view: 'Game'};
     }
 
     changeView = view => {
