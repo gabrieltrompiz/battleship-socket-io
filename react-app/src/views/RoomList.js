@@ -14,6 +14,7 @@ export default class RoomList extends React.Component {
 					<tr>
 						<td>Room ID</td>
 						<td>Players</td>
+						<td>Join</td>
 						<td>Spectate</td>
 						<td>Spectators</td>
 					</tr>
@@ -21,11 +22,13 @@ export default class RoomList extends React.Component {
 						<td>4061</td>
 						<td>2/2</td>
 						<td><button>O</button></td>
+						<td><button>O</button></td>
 						<td>0</td>
 					</tr>
 					<tr>
 						<td>4062</td>
 						<td>1/2</td>
+						<td><button>O</button></td>
 						<td><button>O</button></td>
 						<td>0</td>
 					</tr>
@@ -33,11 +36,12 @@ export default class RoomList extends React.Component {
 						<td>4063</td>
 						<td>2/2</td>
 						<td><button>O</button></td>
+						<td><button>O</button></td>
 						<td>0</td>
 					</tr>
 				</table>
 				<div>
-					<button className='tableBtn' style={{ marginLeft: '55vw', marginRight: '3vw' }} onClick={() => this.props.changeView('Game')}>Back</button>
+					<button className='tableBtn' style={{ marginLeft: '55vw', marginRight: '3vw' }} onClick={() => this.props.changeView('Menu')}>Back</button>
 					<button className='tableBtn' style={{ marginRight: 0 }}>Refresh</button>
 				</div>
 			</div>
