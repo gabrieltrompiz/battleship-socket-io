@@ -13,7 +13,6 @@ class App extends Component {
     }
 
     changeView = view => {
-        console.log('XD');
         this.setState({ view: view })
     };
 
@@ -37,6 +36,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state.view)
         return (
             <div id='container'>
                 {this.getView(this.state.view)}
