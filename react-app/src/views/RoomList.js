@@ -37,7 +37,7 @@ export default class RoomList extends React.Component {
 					</tr>
 				</table>
 				<div>
-					<button className='tableBtn' style={{ marginLeft: '55vw', marginRight: '3vw' }}>Back</button>
+					<button className='tableBtn' style={{ marginLeft: '55vw', marginRight: '3vw' }} onClick={() => this.props.changeView('Game')}>Back</button>
 					<button className='tableBtn' style={{ marginRight: 0 }}>Refresh</button>
 				</div>
 			</div>

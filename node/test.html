@@ -11,20 +11,20 @@
         <button onclick="joinRoom($('joinRoom').value)">Join Room</button>
         <script>
             $ = id => {
-                return document.getElementById(id)
-            }
-            const socket = io('http://localhost:8080/')
+                return document.getElementById(id);
+            };
+            const socket = io('http://localhost:8080/');
             joinRoom = room => {
-                socket.emit('joinRoom', room)   
-                socket.emit('getRooms')
-            }
+                socket.emit('joinRoom', room);
+                socket.emit('getRooms');
+            };
             createRoom = room => {
-                socket.emit('createRoom', room)
-                socket.emit('getRooms')
-            }
-            socket.on('returnRooms', rooms => console.log(rooms))
-            socket.on('errorJoining', error => console.error(error))
-            socket.on('errorCreating', error => console.error(error))
+                socket.emit('createRoom', room);
+                socket.emit('getRooms');
+            };
+            socket.on('returnRooms', rooms => console.log(rooms));
+            socket.on('errorJoining', error => console.error(error));
+            socket.on('errorCreating', error => console.error(error));
         </script>
     </body>
 </html>
