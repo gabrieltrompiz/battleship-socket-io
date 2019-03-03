@@ -76,3 +76,11 @@ td {
 	height: 50vh;
 	padding-bottom: 35vh;
 }
+
+#gameCtn {
+	width: inherit;
+	height: inherit;
+	background-color: blue;
+	position: absolute;
+}
+
