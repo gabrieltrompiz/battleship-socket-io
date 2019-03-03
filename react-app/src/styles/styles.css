@@ -1,5 +1,5 @@
 .menuBtn {
-	width: 33vw;
+	width: 33.4vw;
 	height: 10vh;
 	margin-bottom: 2vh;
 	margin-left: 10px;
@@ -52,5 +52,27 @@
 }
 
 #RoomList {
+	table-layout: fixed;
+	width: inherit;
+	border-collapse: collapse;
+	border: 3px solid black;
+}
 
+td {
+	width: 7.5vw;
+	text-align: center;
+	border: 2px solid black;
+}
+
+.tableBtn {
+	border: none;
+	border-radius: 2px;
+	width: 10vw;
+	height: 20px;
+}
+
+#tableCtn {
+	width: 80vw;
+	height: 50vh;
+	padding-bottom: 35vh;
 }

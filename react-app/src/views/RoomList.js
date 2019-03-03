@@ -9,18 +9,38 @@ export default class RoomList extends React.Component {
 
 	render() {
 		return(
-			<table id='RoomList'>
-				<tr>
-					<td>Room ID</td>
-					<td>Players</td>
-					<td>Spectate</td>
-				</tr>
-				<tr>
-					<td>4060</td>
-					<td>1/2</td>
-					<td><button>O</button></td>
-				</tr>
-			</table>
+			<div id='tableCtn'>
+				<table id='RoomList'>
+					<tr>
+						<td>Room ID</td>
+						<td>Players</td>
+						<td>Spectate</td>
+						<td>Spectators</td>
+					</tr>
+					<tr>
+						<td>4061</td>
+						<td>2/2</td>
+						<td><button>O</button></td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td>4062</td>
+						<td>1/2</td>
+						<td><button>O</button></td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td>4063</td>
+						<td>2/2</td>
+						<td><button>O</button></td>
+						<td>0</td>
+					</tr>
+				</table>
+				<div>
+					<button className='tableBtn' style={{ marginLeft: '55vw', marginRight: '3vw' }}>Back</button>
+					<button className='tableBtn' style={{ marginRight: 0 }}>Refresh</button>
+				</div>
+			</div>
 			);
 	}
 }
