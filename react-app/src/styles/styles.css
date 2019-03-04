@@ -74,28 +74,12 @@ td {
 	margin-top: 1vw;
 }
 
-#dp2 div:last-child:hover {
-	cursor: pointer;
-}
-
-#gameTable {
-
-}
-
-#dp1 {
-
-}
-
 #dp2 {
 	margin-left: 2vw;
 }
 
-#p1 {
-
-}
-
-#gameHistory {
-
+#dp2 div:last-child:hover {
+	cursor: pointer;
 }
 
 #chat {
@@ -104,19 +88,17 @@ td {
 	background-color: white;
 	margin-top: 4vh;
 	margin-left: 3vw;
-	border-bottom-left-radius: 10px;
-	border-top-left-radius: 10px;
-}
-
-#battleships {
-
+	border-bottom-left-radius: 1.5vh;
+	border-top-left-radius: 1.5vh;
 }
 
 #chat input {
 	width: 24vw;
 	border-width: 2;
 	border-color: black;
-	margin-bottom: 10;
+	margin-bottom: 0.5vh;
+	margin-left: 0.5vw;
+	margin-top: -1vh;
 	font-family: 'Press Start 2P', cursive;
 	height: 3vh;
 }
@@ -135,7 +117,7 @@ td {
 
 #chat ul {
 	background-color: #eaeaea;
-	height: 78vh;
+	height: 76vh;
 	overflow-y: auto;
 	word-wrap: break-word;
 }
@@ -171,10 +153,6 @@ td {
 
 #roomTable button {
 	color: green;
-}
-
-#helpCtn {
-
 }
 
 #help {
@@ -223,21 +201,16 @@ li {
 	font-weight: bold;
 }
 
-
-#WhiteDiv {
+#roomInfo {
 	background-color: white;
-	right: 100px;
+	position: absolute;
+	width: 22vw;
+	height: 19vh;
+	top: 78vh;
+	left: 3vw;
+	border-radius: 1vw;
+	font-family: 'Press Start 2P';
+	font-size: 1.1vw;
+	text-align: center;
 }
-
-#BlackDiv {
-	background-color: black;
-	right: 0;	
-}
-
-
-
-
-
-
-
 
