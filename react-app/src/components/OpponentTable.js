@@ -12,7 +12,7 @@ export default class OpponentTable extends React.Component {
         return(
             <div style={{ marginLeft: '1vw' }}>
                 <p style={style}>OPPONENT</p>
-                <div className='gameDiv' id='dp1'>
+                <div className='gameDiv' id='dp2'>
                 {this.state.shotTable.map(row => {
                     return (
                     <div key={this.state.shotTable.indexOf(row)}>

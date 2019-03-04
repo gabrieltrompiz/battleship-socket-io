@@ -74,7 +74,7 @@ td {
 	margin-top: 1vw;
 }
 
-.gameDiv button:hover {
+#dp2 div:last-child:hover {
 	cursor: pointer;
 }
 
