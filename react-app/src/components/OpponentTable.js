@@ -2,131 +2,24 @@ import React from 'react'
 import Cell from './Cell'
 
 export default class OpponentTable extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = { shotTable: shotTable }
+    }
+
     render() {
         return(
             <div style={{ marginLeft: '1vw' }}>
                 <p style={style}>OPPONENT</p>
                 <div className='gameDiv' id='dp1'>
+                {this.state.shotTable.map(row => {
+                    return (
                     <div>
-                        <Cell coord="A1"/>
-                        <Cell coord="B1"/>
-                        <Cell coord="C1"/>
-                        <Cell coord="D1"/>
-                        <Cell coord="E1"/>
-                        <Cell coord="F1"/>
-                        <Cell coord="G1"/>
-                        <Cell coord="H1"/>
-                        <Cell coord="I1"/>
-                        <Cell coord="J1"/>
-                    </div>
-                    <div>
-                        <Cell coord="A2" />
-                        <Cell coord="B2" />
-                        <Cell coord="C2"/>
-                        <Cell coord="D2"/>
-                        <Cell coord="E2"/>
-                        <Cell coord="F2"/>
-                        <Cell coord="G2"/>
-                        <Cell coord="H2"/>
-                        <Cell coord="I2"/>
-                        <Cell coord="J2"/>
-                    </div>
-                    <div>
-                        <Cell coord="A3" />
-                        <Cell coord="B3" />
-                        <Cell coord="C3"/>
-                        <Cell coord="D3"/>
-                        <Cell coord="E3"/>
-                        <Cell coord="F3"/>
-                        <Cell coord="G3"/>
-                        <Cell coord="H3"/>
-                        <Cell coord="I3"/>
-                        <Cell coord="J3"/>
-                    </div>
-                    <div>
-                        <Cell coord="A4" />
-                        <Cell coord="B4" />
-                        <Cell coord="C4"/>
-                        <Cell coord="D4"/>
-                        <Cell coord="E4"/>
-                        <Cell coord="F4"/>
-                        <Cell coord="G4"/>
-                        <Cell coord="H4"/>
-                        <Cell coord="I4"/>
-                        <Cell coord="J4"/>
-                    </div>
-                    <div>
-                        <Cell coord="A5" />
-                        <Cell coord="B5" />
-                        <Cell coord="C5"/>
-                        <Cell coord="D5"/>
-                        <Cell coord="E5"/>
-                        <Cell coord="F5"/>
-                        <Cell coord="G5"/>
-                        <Cell coord="H5"/>
-                        <Cell coord="I5"/>
-                        <Cell coord="J5"/>
-                    </div>
-                    <div>
-                        <Cell coord="A6" />
-                        <Cell coord="B6" />
-                        <Cell coord="C6"/>
-                        <Cell coord="D6"/>
-                        <Cell coord="E6"/>
-                        <Cell coord="F6"/>
-                        <Cell coord="G6"/>
-                        <Cell coord="H6"/>
-                        <Cell coord="I6"/>
-                        <Cell coord="J6"/>
-                    </div>
-                    <div>
-                        <Cell coord="A7" />
-                        <Cell coord="B7" />
-                        <Cell coord="C7"/>
-                        <Cell coord="D7"/>
-                        <Cell coord="E7"/>
-                        <Cell coord="F7"/>
-                        <Cell coord="G7"/>
-                        <Cell coord="H7"/>
-                        <Cell coord="I7"/>
-                        <Cell coord="J7"/>
-                    </div>
-                    <div>
-                        <Cell coord="A8" />
-                        <Cell coord="B8" />
-                        <Cell coord="C8"/>
-                        <Cell coord="D8"/>
-                        <Cell coord="E8"/>
-                        <Cell coord="F8"/>
-                        <Cell coord="G8"/>
-                        <Cell coord="H8"/>
-                        <Cell coord="I8"/>
-                        <Cell coord="J8"/>
-                    </div>
-                    <div>
-                        <Cell coord="A9" />
-                        <Cell coord="B9" />
-                        <Cell coord="C9"/>
-                        <Cell coord="D9"/>
-                        <Cell coord="E9"/>
-                        <Cell coord="F9"/>
-                        <Cell coord="G9"/>
-                        <Cell coord="H9"/>
-                        <Cell coord="I9"/>
-                        <Cell coord="J9"/>
-                    </div>
-                    <div>
-                        <Cell coord="A10" />
-                        <Cell coord="B10" />
-                        <Cell coord="C10"/>
-                        <Cell coord="D10"/>
-                        <Cell coord="E10"/>
-                        <Cell coord="F10"/>
-                        <Cell coord="G10"/>
-                        <Cell coord="H10"/>
-                        <Cell coord="I10"/>
-                        <Cell coord="J10"/>
-                    </div>
+                        {Object.keys(row).map(key => {
+                            return <Cell coord={key} shot={row[key]} />
+                        })}
+                    </div>)
+                })}  
                 </div>
             </div>
         );
@@ -142,3 +35,16 @@ const style = {
     marginBottom: 0,
     marginTop: 20
 }
+
+const shotTable = [
+    { A1: false, B1: false, C1: false, D1: false, E1: false, F1: false, G1: false, H1: false, I1: false, J1: false },
+    { A2: false, B2: false, C2: false, D2: false, E2: false, F2: false, G2: false, H2: false, I2: false, J2: false },
+    { A3: false, B3: false, C3: false, D3: false, E3: false, F3: false, G3: false, H3: false, I3: false, J3: false },
+    { A4: false, B4: false, C4: false, D4: false, E4: false, F4: false, G4: false, H4: false, I4: false, J4: false },
+    { A5: false, B5: false, C5: false, D5: false, E5: false, F5: false, G5: false, H5: false, I5: false, J5: false },
+    { A6: false, B6: false, C6: false, D6: false, E6: false, F6: false, G6: false, H6: false, I6: false, J6: false },
+    { A7: false, B7: false, C7: false, D7: false, E7: false, F7: false, G7: false, H7: false, I7: false, J7: false },
+    { A8: false, B8: false, C8: false, D8: false, E8: false, F8: false, G8: false, H8: false, I8: false, J8: false },
+    { A9: false, B9: false, C9: false, D9: false, E9: false, F9: false, G9: false, H9: false, I9: false, J9: false },
+    { A10: false, B10: false, C10: false, D10: false, E10: false, F10: false, G10: false, H10: false, I10: false, J10: false }
+]
