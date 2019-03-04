@@ -12,7 +12,6 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {endpoint: 'localhost:8080', view: 'Menu'};
-        this.socket = SocketIOClient(this.state.endpoint);
         this.rooms = {};
     }
 
@@ -21,9 +20,9 @@ class App extends Component {
     };
 
     roomRequest = async () => {
-        await this.socket.emit('getRooms', this.rooms);
-        await this.socket.on('returnRoom', rooms => {
-            console.log('mardita mierda podeis servir por favor')
+        const socket = SocketIOClient(this.state.endpoint);
+        await socket.emit('getRooms');
+        socket.on('returnRooms', rooms => {
             console.log(rooms);
             this.rooms = rooms;
         });
@@ -32,14 +31,12 @@ class App extends Component {
     };
 
     createRoom = async () => {
-        console.log('Holi');
-        await this.socket.emit('createRoom', 'myRoom');
-        this.socket.on('roomCreated', (msg) => {
+        const socket = SocketIOClient(this.state.endpoint);
+        await socket.emit('createRoom');
+        socket.on('roomCreated', (msg) => {
             console.log(msg);
         });
-        this.socket.on('errorCreating', (msg) => {
-            console.log(msg);
-        });
+        this.changeView('Game');
     };
 
     getView(view) {
