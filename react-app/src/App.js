@@ -45,7 +45,7 @@ class App extends Component {
                 return <Menu changeView={this.changeView} socket={socket} setActiveRoom={this.setActiveRoom} requestRoom={this.roomRequest}/>;
 
             case 'RoomList':
-                return <RoomList changeView={this.changeView} socket={socket} rooms={this.state.rooms} refresh={this.roomRequest}/>;
+                return <RoomList changeView={this.changeView} socket={socket} rooms={this.state.rooms} refresh={this.roomRequest} setActiveRoom={this.setActiveRoom}/>;
 
             case 'Game':
                 return <Game changeView={this.changeView} socket={socket} room={this.state.activeRoom}/>;
@@ -62,6 +62,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state.activeRoom)
         return (
             <div id='container'>
                 {this.getView(this.state.view)}

@@ -3,7 +3,7 @@ import React from 'react'
 export default class Chat extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { message: '', messageList: [], room: 'room1' }
+        this.state = { message: '', messageList: [] }
         this.socket = this.props.socket
     }
 
@@ -23,7 +23,7 @@ export default class Chat extends React.Component {
         if(this.state.message !== '') {
             const message = <span><span style={{ color: 'blue' }}>YOU: </span>{this.state.message}</span>
             const joined = this.state.messageList.concat(message)
-            this.socket.emit('chat message', this.state.room, this.state.message);
+            this.socket.emit('chat message', this.props.room, this.state.message);
             this.setState({ message: '', messageList: joined })
         }
     }

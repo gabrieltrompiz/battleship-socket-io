@@ -17,10 +17,10 @@ io.on('connection', socket => {
                 socket.join(room);
                 rooms = io.sockets.adapter.rooms;
             }
-            else socket.emit('errorJoining', "Room full. Wait until game is finished.");
+            else console.log('errorJoining', "Room full. Wait until game is finished.");
             
         } 
-        else socket.emit('errorJoining', 'Room doesn\'t exists');
+        else console.log('errorJoining', 'Room doesn\'t exists');
     });
 
     socket.on('createRoom', () => {

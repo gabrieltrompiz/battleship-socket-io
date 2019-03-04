@@ -49,24 +49,10 @@
 	text-align: center;
 }
 
-#RoomList {
-	table-layout: fixed;
-	width: inherit;
-	border-collapse: collapse;
-	border: 3px solid black;
-}
-
 td {
 	width: 7.5vw;
 	text-align: center;
 	border: 2px solid black;
-}
-
-.tableBtn {
-	border: none;
-	border-radius: 2px;
-	width: 10vw;
-	height: 20px;
 }
 
 #tableCtn {
@@ -154,4 +140,31 @@ td {
 	font-family: 'Press Start 2P', cursive;
 	list-style-type: none;
 	padding: 6px;
+}
+
+.tableBtn {
+	font-family: 'Press Start 2P', cursive;
+	background-color: transparent;
+	border: none;
+	color: red;
+	font-size: 1.1vw;
+}
+
+.tableBtn:hover {
+	cursor: pointer;
+}
+
+#roomTable {
+	width: inherit;
+	border-collapse: collapse;
+	border: 3px solid black;
+	font-family: 'Press Start 2P', cursive;
+}
+
+#roomTable tr {
+	line-height: 5vh; 
+}
+
+#roomTable button {
+	color: green;
 }
