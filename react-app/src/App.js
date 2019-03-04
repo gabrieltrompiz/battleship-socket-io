@@ -21,15 +21,25 @@ class App extends Component {
     };
 
     roomRequest = async () => {
-        await this.socket.emit('getRooms');
-        await this.socket.on('returnRoom', this.rooms);
+        await this.socket.emit('getRooms', this.rooms);
+        await this.socket.on('returnRoom', rooms => {
+            console.log('mardita mierda podeis servir por favor')
+            console.log(rooms);
+            this.rooms = rooms;
+        });
         console.log(this.rooms);
         this.changeView('RoomList');
     };
 
     createRoom = async () => {
-        await this.socket.emit('createRoom');
-
+        console.log('Holi');
+        await this.socket.emit('createRoom', 'myRoom');
+        this.socket.on('roomCreated', (msg) => {
+            console.log(msg);
+        });
+        this.socket.on('errorCreating', (msg) => {
+            console.log(msg);
+        });
     };
 
     getView(view) {

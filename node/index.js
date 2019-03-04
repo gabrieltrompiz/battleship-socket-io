@@ -8,6 +8,7 @@ io.on('connection', socket => {
 
     socket.on('getRooms', () => {
         socket.emit('returnRooms', rooms);
+        console.log('XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
     });
 
     socket.on('joinRoom', room => {
@@ -28,8 +29,9 @@ io.on('connection', socket => {
             rooms = io.sockets.adapter.rooms;
         }
         else socket.emit('errorCreating', 'Room already exists');
-        
+        socket.emit('roomCreated', rooms);
     });
+
     socket.on('disconnect', () => {
         socket.leaveAll();
     })
