@@ -40,7 +40,7 @@ export default class Chat extends React.Component {
                 <p style={style}>CHAT</p>
                 <ul id="messages">
                     {this.state.messageList.map(value => {
-                        return <li>{value}</li>
+                        return <li key={this.state.messageList.indexOf(value)}>{value}</li>
                     })}
                 </ul>
                 <input autoComplete="off" value={this.state.message} onChange={this.handleChange} onKeyPress={this.handleKey}/>

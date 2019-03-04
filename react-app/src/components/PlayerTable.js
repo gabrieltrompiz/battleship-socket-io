@@ -13,9 +13,9 @@ export default class PlayerTable extends React.Component {
                 <div className='gameDiv' id='dp1'>
                 {this.state.shotTable.map(row => {
                     return (
-                    <div>
+                    <div key={this.state.shotTable.indexOf(row)}>
                         {Object.keys(row).map(key => {
-                            return <Cell coord={key} shot={row[key]} key={key}/>
+                            return <Cell coord={key} shot={row[key]} key={key + ' player'}/>
                         })}
                     </div>)
                 })}
