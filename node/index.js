@@ -2,6 +2,7 @@ const app = require('express')();
 const io = require('socket.io').listen(app.listen(8080));
 
 let rooms = {};
+let roomvar = 1000;
 
 io.on('connection', socket => {
     console.log('User connected');
@@ -22,13 +23,14 @@ io.on('connection', socket => {
         else socket.emit('errorJoining', 'Room doesn\'t exists');
     });
 
-    socket.on('createRoom', room => {
-        if(!rooms.hasOwnProperty(room)) { // if room doesn't exists
-            socket.join(room);
+    socket.on('createRoom', () => {
+        if(!rooms.hasOwnProperty(roomvar)) { // if room doesn't exists
+            socket.join(roomvar);
+            roomvar++;
             rooms = io.sockets.adapter.rooms;
+            socket.emit('roomCreated', rooms);
         }
         else socket.emit('errorCreating', 'Room already exists');
-        
     });
 
     socket.on('fire', coord => {

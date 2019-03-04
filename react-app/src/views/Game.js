@@ -266,6 +266,10 @@ export default class Game extends React.Component {
               <div id='battleships'>
 
               </div>
+
+              <div id='roomInfo'>
+                  <button>Give Up</button>
+              </div>
           </div>
         );
     }
