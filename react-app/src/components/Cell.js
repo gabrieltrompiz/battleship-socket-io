@@ -4,6 +4,11 @@ export default class Cell extends React.Component {
     constructor(props) {
         super(props);
         this.state = {}
+        this.socket = this.props.socket
+    }
+
+    shoot = () => {
+        this.socket.emit('fire', this.props.room, this.props.coord)
     }
 
     render() {
@@ -32,7 +37,7 @@ export default class Cell extends React.Component {
                     {isLeft && <span style={styleLeft}>{this.props.coord.charAt(0)}</span>}
                     {this.props.own && 
                     <button style={{ backgroundColor: color, opacity: 0.8, width: '3vw', height: '3vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}
-                    onClick={() => console.log(this.props.coord)}>
+                    onClick={() => this.shoot()}>
                     </button>}
                     {!this.props.own && 
                     <div style={{ backgroundColor: color, opacity: 0.8, width: '3vw', height: '3vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}></div>}

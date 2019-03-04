@@ -11,11 +11,10 @@ export default class Game extends React.Component {
     }
 
     render() {
-        console.log(this.props.room)
         return(
           <div id='gameTables'>
-              <PlayerTable />
-              <OpponentTable />
+              <PlayerTable socket={this.props.socket} room={this.props.room}/>
+              <OpponentTable socket={this.props.socket} room={this.props.room}/>
 
               <Chat socket={this.props.socket} room={this.props.room}/>
 

@@ -5,7 +5,18 @@ export default class PlayerTable extends React.Component {
     constructor(props) {
         super(props)
         this.state = { shotTable: shotTable }
+        this.socket = this.props.socket
     }
+
+    componentDidMount = () => {
+        this.socket.on('fire', coord => {
+            const table = [...this.state.shotTable]
+            const row = parseInt(coord.substring(1), 10)
+            table[row -1][coord] = true;
+            this.setState({ shotTable: table })
+        })
+    }
+
     render() {
         return(
             <div>

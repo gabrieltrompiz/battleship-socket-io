@@ -33,8 +33,8 @@ io.on('connection', socket => {
         else socket.emit('errorCreating', 'Room already exists');
     });
 
-    socket.on('fire', coord => {
-        socket.broadcast.to(socket.rooms[1]).emit('fire', coord)
+    socket.on('fire', (room, coord) => {
+        socket.in(room).emit('fire', coord)
     })
 
     socket.on('chat message', (room, message) => {

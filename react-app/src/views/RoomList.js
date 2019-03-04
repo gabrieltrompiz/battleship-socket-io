@@ -27,16 +27,18 @@ export default class RoomList extends React.Component {
 						</tr>
 						{this.props.rooms.map(room => {
 							const key = Object.keys(room) // maps roomID
+							const full = room[key].length === 2;
 							return(
 								<tr>
 									<td>{key}</td>
 									<td>{room[key].length + "/2"}</td>
 									<td>0</td>
 									<td>
-										<button onClick={() => this.joinRoom(key)} className='tableBtn'>JOIN</button>
+										<button onClick={() => this.joinRoom(key)} className='tableBtn' 
+										style={{color: full ? 'red' : 'green', cursor: full ? 'auto' : 'pointer' }} disabled={full}>JOIN</button>
 									</td>
 									<td>
-										<button onClick={() => this.joinRoom(key)} className='tableBtn'>SPECTATE</button> {/* FIXME: spectate method */}
+										<button onClick={() => console.log('spectate')} className='tableBtn'>SPECTATE</button> {/* FIXME: spectate method */}
 									</td>
 								</tr>
 							)
