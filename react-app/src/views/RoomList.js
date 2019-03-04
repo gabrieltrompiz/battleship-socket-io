@@ -36,7 +36,7 @@ export default class RoomList extends React.Component {
 				</table>
 				<div>
 					<button className='tableBtn' style={{ marginLeft: '55vw', marginRight: '3vw' }} onClick={() => this.props.changeView('Menu')}>Back</button>
-					<button className='tableBtn' style={{ marginRight: 0 }}>Refresh</button>
+					<button className='tableBtn' style={{ marginRight: 0 }} onClick={() => this.props.refresh()}>Refresh</button>
 				</div>
 			</div>
 			);

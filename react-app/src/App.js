@@ -15,13 +15,25 @@ class App extends Component {
         this.rooms = {};
     }
 
+    roomRequest = async () => {
+        socket.emit('getRooms');
+        socket.on('returnRooms', rooms => {
+			const keys = Object.keys(rooms)
+			const roomList = []
+			keys.forEach(key => {
+				let json = {}
+				if(!isNaN(key)) { // if room is actually a game room and not a socket
+					json[key] = rooms[key]
+					roomList.push(json)
+				}
+			})
+			this.setState({ rooms: roomList, view: 'RoomList' })
+        });
+    };
+
     changeView = view => {
         this.setState({ view: view})
     };
-
-    setRooms = rooms => {
-        this.setState({ rooms: rooms })
-    }
 
     setActiveRoom = room => {
         this.setState({ activeRoom: room })
@@ -30,10 +42,10 @@ class App extends Component {
     getView(view) {
         switch(view) {
             case 'Menu':
-                return <Menu changeView={this.changeView} socket={socket} setRooms={this.setRooms} setActiveRoom={this.setActiveRoom}/>;
+                return <Menu changeView={this.changeView} socket={socket} setActiveRoom={this.setActiveRoom} requestRoom={this.roomRequest}/>;
 
             case 'RoomList':
-                return <RoomList changeView={this.changeView} socket={socket} rooms={this.state.rooms}/>;
+                return <RoomList changeView={this.changeView} socket={socket} rooms={this.state.rooms} refresh={this.roomRequest}/>;
 
             case 'Game':
                 return <Game changeView={this.changeView} socket={socket} room={this.state.activeRoom}/>;
