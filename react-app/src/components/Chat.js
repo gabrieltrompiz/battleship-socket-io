@@ -5,8 +5,6 @@ export default class Chat extends React.Component {
         super(props)
         this.state = { message: '', messageList: [], room: 'room1' }
         this.socket = this.props.socket
-        this.socket.emit('createRoom', 'room1')
-        this.socket.emit('joinRoom', 'room1')
     }
 
     componentDidMount = () => {

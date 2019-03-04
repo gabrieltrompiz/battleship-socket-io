@@ -6,12 +6,12 @@ import RoomList from './views/RoomList'
 import Game from './views/Game';
 import GameSpectator from './views/GameSpectator';
 import Help from './views/Help'
-import SocketIOClient from 'socket.io-client';
+import * as io from 'socket.io-client';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {endpoint: 'localhost:8080', view: 'Menu'};
+        this.state = { endpoint: 'localhost:8080', view: 'Menu', rooms: [], activeRoom: 0 };
         this.rooms = {};
     }
 
@@ -19,36 +19,24 @@ class App extends Component {
         this.setState({ view: view})
     };
 
-    roomRequest = async () => {
-        const socket = SocketIOClient(this.state.endpoint);
-        await socket.emit('getRooms');
-        socket.on('returnRooms', rooms => {
-            console.log(rooms);
-            this.rooms = rooms;
-        });
-        console.log(this.rooms);
-        this.changeView('RoomList');
-    };
+    setRooms = rooms => {
+        this.setState({ rooms: rooms })
+    }
 
-    createRoom = async () => {
-        const socket = SocketIOClient(this.state.endpoint);
-        await socket.emit('createRoom');
-        socket.on('roomCreated', (msg) => {
-            console.log(msg);
-        });
-        this.changeView('Game');
-    };
+    setActiveRoom = room => {
+        this.setState({ activeRoom: room })
+    }
 
     getView(view) {
         switch(view) {
             case 'Menu':
-                return <Menu changeView={this.changeView} roomRequest={this.roomRequest} createRoom={this.createRoom} />;
+                return <Menu changeView={this.changeView} socket={socket} setRooms={this.setRooms} setActiveRoom={this.setActiveRoom}/>;
 
             case 'RoomList':
-                return <RoomList changeView={this.changeView} socket={socket}/>;
+                return <RoomList changeView={this.changeView} socket={socket} rooms={this.state.rooms}/>;
 
             case 'Game':
-                return <Game changeView={this.changeView} socket={socket}/>;
+                return <Game changeView={this.changeView} socket={socket} room={this.state.activeRoom}/>;
 
             case 'GameSpectator':
                 return <GameSpectator changeView={this.changeView} socket={socket}/>;
@@ -62,7 +50,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.view);
         return (
             <div id='container'>
                 {this.getView(this.state.view)}

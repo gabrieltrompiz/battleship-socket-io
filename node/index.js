@@ -1,7 +1,7 @@
 const app = require('express')();
 const io = require('socket.io').listen(app.listen(8080));
 
-let rooms = {};
+let rooms = [];
 let roomvar = 1000;
 
 io.on('connection', socket => {
@@ -26,9 +26,9 @@ io.on('connection', socket => {
     socket.on('createRoom', () => {
         if(!rooms.hasOwnProperty(roomvar)) { // if room doesn't exists
             socket.join(roomvar);
-            roomvar++;
+            socket.emit('roomCreated', roomvar);
             rooms = io.sockets.adapter.rooms;
-            socket.emit('roomCreated', rooms);
+            roomvar++;
         }
         else socket.emit('errorCreating', 'Room already exists');
     });
@@ -38,7 +38,6 @@ io.on('connection', socket => {
     })
 
     socket.on('chat message', (room, message) => {
-        console.log(socket.rooms)
         socket.in(room).emit('chat message', message)
     })
 
