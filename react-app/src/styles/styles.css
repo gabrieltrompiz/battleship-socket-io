@@ -168,3 +168,52 @@ td {
 #roomTable button {
 	color: green;
 }
+
+#helpCtn {
+
+}
+
+#help {
+	position: absolute;
+	width: 75vw;
+	top: 8vh;
+	left: 5vw;
+}
+
+.hImg {
+	position: absolute;
+	width: 15.5vw;
+	height: 15.5vw;
+}
+
+#img1 {
+	top: 1.8vh;
+	right: 1.3vw;
+}
+
+#img2 {
+	top: 34vh;
+	right: 1.3vw;
+}
+
+#img3 {
+	top: 66.2vh;
+	right: 1.3vw;
+}
+
+#helpBtn {
+	position: absolute;
+	top: 80vh;
+	left: 42vw;
+	width: 80px;
+	height: 30px;
+	color: red;
+	cursor: pointer;
+	font-family: 'Press Start 2P';
+	border: none;
+	background-color: transparent;
+}
+
+li {
+	font-weight: bold;
+}
