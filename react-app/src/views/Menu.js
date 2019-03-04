@@ -1,7 +1,5 @@
 import React from 'react';
 import '../styles/styles.css';
-import { isNumber } from 'util';
-
 
 export default class Menu extends React.Component {
 	constructor(props) {

@@ -1,5 +1,4 @@
 import React from 'react';
-import Cell from '../components/Cell'
 import Chat from '../components/Chat'
 import PlayerTable from '../components/PlayerTable'
 import '../styles/styles.css';

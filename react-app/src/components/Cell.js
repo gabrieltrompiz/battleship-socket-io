@@ -30,9 +30,12 @@ export default class Cell extends React.Component {
                 {isTop && <p style={styleTop}>{this.props.coord.split(this.props.coord.charAt(0))}</p>}     
                 <div style={{ display: 'flex' }}>
                     {isLeft && <span style={styleLeft}>{this.props.coord.charAt(0)}</span>}
+                    {this.props.own && 
                     <button style={{ backgroundColor: color, opacity: 0.8, width: '3vw', height: '3vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}
                     onClick={() => console.log(this.props.coord)}>
-                    </button>
+                    </button>}
+                    {!this.props.own && 
+                    <div style={{ backgroundColor: color, opacity: 0.8, width: '3vw', height: '3vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}></div>}
                 </div>               
             </div>
             

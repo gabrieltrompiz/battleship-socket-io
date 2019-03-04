@@ -15,7 +15,7 @@ export default class PlayerTable extends React.Component {
                     return (
                     <div>
                         {Object.keys(row).map(key => {
-                            return <Cell coord={key} shot={row[key]} />
+                            return <Cell coord={key} shot={row[key]} key={key}/>
                         })}
                     </div>)
                 })}
