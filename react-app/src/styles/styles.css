@@ -176,29 +176,29 @@ td {
 #help {
 	position: absolute;
 	width: 75vw;
-	top: 8vh;
-	left: 5vw;
+	top: 4vh;
+	left: 2.5vw;
+	font-family: 'Press Start 2P';
+	font-size: 13px;
 }
 
 .hImg {
 	position: absolute;
 	width: 15.5vw;
 	height: 15.5vw;
+	right: 2.5vw;
 }
 
 #img1 {
 	top: 1.8vh;
-	right: 1.3vw;
 }
 
 #img2 {
 	top: 34vh;
-	right: 1.3vw;
 }
 
 #img3 {
 	top: 66.2vh;
-	right: 1.3vw;
 }
 
 #helpBtn {
@@ -210,6 +210,7 @@ td {
 	color: red;
 	cursor: pointer;
 	font-family: 'Press Start 2P';
+	font-size: 1.1vw;
 	border: none;
 	background-color: transparent;
 }
@@ -217,3 +218,22 @@ td {
 li {
 	font-weight: bold;
 }
+
+
+#WhiteDiv {
+	background-color: white;
+	right: 100px;
+}
+
+#BlackDiv {
+	background-color: black;
+	right: 0;	
+}
+
+
+
+
+
+
+
+

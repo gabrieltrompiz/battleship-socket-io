@@ -11,7 +11,7 @@ export default class Help extends React.Component {
 			<div>
 				<div id='help'>
 					Battleship (also Battleships or Sea Battle) is a guessing game for two players.
-					It is played on ruled grids (paper or board) on which each players fleet of ships (including battleships) are marked.
+					It is played on ruled grids on which each players fleet of ships (including battleships) are marked.
 					The locations of the fleets are concealed from the other player.
 					Players alternate turns calling "shots" at the other player's ships,
 					and the objective of the game is to destroy the opposing player's fleet. <br></br><br></br>
@@ -30,7 +30,7 @@ export default class Help extends React.Component {
 					Each ship occupies a number of consecutive squares on the grid, arranged either horizontally or vertically.
 					The number of squares for each ship is determined by the type of the ship.
 					The ships cannot overlap (i.e., only one ship can occupy any given square in the grid).
-					The types and numbers of ships allowed are the same for each player.
+					The types and numbers of ships allowed are the same for each player.<br></br><br></br>
 
 					<h3>The 1990 Milton Bradley version of the rules specify the following ships:</h3>
 					<ul>
