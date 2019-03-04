@@ -30,7 +30,18 @@ io.on('connection', socket => {
         else socket.emit('errorCreating', 'Room already exists');
         
     });
+
+    socket.on('fire', coord => {
+        socket.broadcast.to(socket.rooms[1]).emit('fire', coord)
+    })
+
+    socket.on('chat message', (room, message) => {
+        console.log(socket.rooms)
+        socket.in(room).emit('chat message', message)
+    })
+
     socket.on('disconnect', () => {
+        console.log('User disconnected')
         socket.leaveAll();
     })
 });

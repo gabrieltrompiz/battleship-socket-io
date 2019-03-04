@@ -115,8 +115,44 @@ td {
 	background-color: white;
 	margin-top: 4vh;
 	margin-left: 3vw;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
 }
 
 #battleships {
 
+}
+
+#chat input {
+	width: 25vw;
+	border-width: 2;
+	border-color: black;
+	margin-bottom: 10;
+	font-family: 'Press Start 2P', cursive;
+	height: 3vh;
+}
+
+#chat button {
+	width: 4vw;
+	font-family: 'Press Start 2P', cursive;
+	background-color: transparent;
+	border: none;
+	color: red;
+}
+
+#chat button:hover {
+	cursor: pointer;
+}
+
+#chat ul {
+	background-color: #eaeaea;
+	height: 78vh;
+	overflow-y: auto;
+	word-wrap: break-word;
+}
+
+#chat li {
+	font-family: 'Press Start 2P', cursive;
+	list-style-type: none;
+	padding: 6px;
 }

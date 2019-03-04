@@ -1,5 +1,6 @@
 import React from 'react';
 import Cell from '../components/Cell'
+import Chat from '../components/Chat'
 import '../styles/styles.css';
 
 export default class Game extends React.Component {
@@ -10,11 +11,10 @@ export default class Game extends React.Component {
 
     render() {
         return(
-        
           <div id='gameTables'>
             <div className='gameDiv' id='dp1'>
                 <div>
-                    <Cell coord="A1"/>
+                    <Cell coord="A1" socket={this.props.socket}/>
                     <Cell coord="B1"/>
                     <Cell coord="C1"/>
                     <Cell coord="D1"/>
@@ -261,9 +261,7 @@ export default class Game extends React.Component {
 
               </div>
 
-              <div id='chat'>
-
-              </div>
+              <Chat socket={this.props.socket}/>
 
               <div id='battleships'>
 
