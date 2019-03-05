@@ -3,17 +3,23 @@ import React from 'react'
 export default class Cell extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { shoot: false };
         this.socket = this.props.socket;
     }
 
     shoot = () => {
-        const table = [...this.props.shotTable];
-        const row = parseInt(this.props.coord.substring(1), 10);
-        table[row - 1][this.props.coord] = true;
-        this.props.changeTable(table)
-        this.socket.emit('fire', this.props.room, this.props.coord);
-		//this.props.disabled = true;
+    	if(!this.state.shoot) {
+			const table = [...this.props.shotTable];
+			const row = parseInt(this.props.coord.substring(1), 10);
+			table[row - 1][this.props.coord] = true;
+			this.props.changeTable(table)
+			this.socket.emit('fire', this.props.room, this.props.coord);
+			this.setState({ shoot: true });
+			//this.props.disabled = true;
+		}
+
+		else
+			console.log('ya shutiaste sapo');
     };
 
     render() {
