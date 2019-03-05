@@ -18,7 +18,7 @@ export default class Game extends React.Component {
 				<OpponentTable socket={this.props.socket} room={this.props.room}/>
 
 				<Chat socket={this.props.socket} room={this.props.room}/>
-				<RoomInfo room={this.props.room}/>
+				<RoomInfo socket={this.props.socket} room={this.props.room}/>
 			</div>
 		);
 	}

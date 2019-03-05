@@ -14,7 +14,7 @@ class App extends Component {
         this.rooms = {};
     }
 
-    roomRequest = async () => {
+    roomRequest = () => {
         socket.emit('getRooms');
         socket.on('returnRooms', rooms => {
 			const keys = Object.keys(rooms)
@@ -34,7 +34,7 @@ class App extends Component {
         this.setState({ view: view})
     };
 
-    setActiveRoom = room => {
+    setActiveRoom = async room => {
         this.setState({ activeRoom: room })
     }
 
@@ -61,7 +61,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.activeRoom)
         return (
             <div id='container'>
                 {this.getView(this.state.view)}

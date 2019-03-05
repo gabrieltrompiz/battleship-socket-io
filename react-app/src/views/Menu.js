@@ -9,11 +9,10 @@ export default class Menu extends React.Component {
 	}
 
     createRoom = async () => {
-        await this.socket.emit('createRoom');
+        this.socket.emit('createRoom');
         this.socket.on('roomCreated', room => {
-            this.props.setActiveRoom(room)
-        });
-        this.props.changeView('Game');
+            this.props.setActiveRoom(room).then(() => this.props.changeView('Game'))
+        });       
     };
 
 	render() {

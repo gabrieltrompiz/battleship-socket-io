@@ -16,6 +16,7 @@ io.on('connection', socket => {
             if(rooms[room].length < 2) { // if room already has two players
                 socket.join(room);
                 rooms = io.sockets.adapter.rooms;
+                io.in(room).emit('roomUpdate', rooms[room])
             }
             else console.log('errorJoining', "Room full. Wait until game is finished.");
             
@@ -25,6 +26,7 @@ io.on('connection', socket => {
 
     socket.on('createRoom', () => {
         if(!rooms.hasOwnProperty(roomvar)) { // if room doesn't exists
+            socket.emit('getRoomInfo', roomvar)
             socket.join(roomvar);
             socket.emit('roomCreated', roomvar);
             rooms = io.sockets.adapter.rooms;
@@ -39,6 +41,12 @@ io.on('connection', socket => {
 
     socket.on('chat message', (room, message) => {
         socket.in(room).emit('chat message', message)
+    })
+
+    socket.on('getRoomInfo', room => {
+        console.log(room)
+        console.log(rooms[room])
+        socket.emit('getRoomInfo', rooms[room])
     })
 
     socket.on('disconnect', () => {

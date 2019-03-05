@@ -3,20 +3,24 @@ import React from 'react';
 export default class RoomInfo extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { room: 0}
-	}
-
-	componentDidMount = () => {
-		this.setState({room: this.props.activeRoom})
+		this.state = { roomInfo: {} }
+		this.socket = this.props.socket
+		this.socket.on('roomUpdate', room => {
+			this.setState({ roomInfo: room })
+		})
+		this.socket.on('getRoomInfo', roomInfo => {
+			this.setState({ roomInfo: roomInfo })
+		})
+		this.socket.emit('getRoomInfo', this.props.room)
 	}
 
 	render() {
 		return(
 			<div id='roomInfo'>
-				<p># of Room: {this.props.room}</p>
-				<p># of Spectators: 0 {/*this.state.roomSpectators*/}</p>
-				<p>Players: 1{/*this.state.players*/}/2</p>
-				<button className='tableBtn'>Left Room</button>
+				<p>Room ID: {this.props.room}</p>
+				<p># of Spectators: 0</p>
+				<p>Players: {this.state.roomInfo.length}/2</p>
+				<button className='tableBtn'>Leave Room</button>
 			</div>
 			);
 	}
