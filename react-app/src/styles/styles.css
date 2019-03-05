@@ -87,7 +87,7 @@ td {
 	width: 30vw;
 	background-color: white;
 	margin-top: 4vh;
-	margin-left: 3vw;
+	margin-left: 5.4vw;
 	border-bottom-left-radius: 1.5vh;
 	border-top-left-radius: 1.5vh;
 }
@@ -109,6 +109,7 @@ td {
 	background-color: transparent;
 	border: none;
 	color: red;
+	margin-left: 0.25vw;
 }
 
 #chat button:hover {
