@@ -14,7 +14,6 @@ io.on('connection', socket => {
     socket.on('joinRoom', room => {
         if(rooms.hasOwnProperty(room)) { // if room exists
             if(rooms[room].length < 2) { // if room doesn't have two players already
-            	io.in(room).emit('initGame');
                 socket.join(room);
                 rooms = io.sockets.adapter.rooms;
                 io.in(room).emit('roomUpdate', rooms[room]);

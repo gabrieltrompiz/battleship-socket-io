@@ -9,8 +9,8 @@ export default class Game extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { turn: false, time: '--'};
-		this.props.socket.on('initGame', () => {
-			this.setState({turn: true});
+		this.props.socket.on('initGame', (turn) => {
+			this.setState({turn: turn});
 		});
 
 		this.props.socket.on('setTurn', (turn) => {

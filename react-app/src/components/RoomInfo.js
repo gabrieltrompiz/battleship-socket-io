@@ -3,7 +3,7 @@ import React from 'react';
 export default class RoomInfo extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { roomInfo: {}, stateMsg: 'Press when you\'re ready' };
+		this.state = { roomInfo: {}, stateMsg: 'Press when you\'re ready', playing: false };
 		this.socket = this.props.socket;
 		this.socket.on('roomUpdate', room => {
 			this.setState({ roomInfo: room });
@@ -21,6 +21,7 @@ export default class RoomInfo extends React.Component {
 
 	setReady = () => {
 		this.socket.emit('playerReady');
+		if(this.state.roomInfo.length === 1) this.setState({stateMsg: 'Waiting for Opponent'});
 	};
 
 	render() {

@@ -15,7 +15,6 @@ export default class Cell extends React.Component {
 			this.props.changeTable(table)
 			this.socket.emit('fire', this.props.room, this.props.coord);
 			this.setState({ shoot: true });
-			//this.props.disabled = true;
 		}
 
 		else
