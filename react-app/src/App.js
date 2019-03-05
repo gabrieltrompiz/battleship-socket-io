@@ -28,9 +28,8 @@ class App extends Component {
     roomRequest = () => {
         socket.emit('getRooms');
         socket.on('returnRooms', rooms => {
-			const keys = Object.keys(rooms)
 			const roomList = []
-			keys.forEach(key => {
+			Object.keys(rooms).forEach(key => {
 				let json = {}
 				if(!isNaN(key)) { // if room is actually a game room and not a socket
 					json[key] = rooms[key]

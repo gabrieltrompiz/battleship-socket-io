@@ -18,7 +18,7 @@
 
 #menuCtn {
 	width: 35vw;
-	height: 48vh;
+	height: 'inherit';
 	background-color: rgb(50, 50, 50);
 	border-radius: 20px;
 	margin: 0 auto;
@@ -78,7 +78,7 @@ td {
 	margin-left: 2vw;
 }
 
-#dp2 div:last-child:hover {
+.shootable:hover {
 	cursor: pointer;
 }
 

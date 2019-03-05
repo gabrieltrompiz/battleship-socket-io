@@ -16,7 +16,7 @@ export default class RoomInfo extends React.Component {
 
 	leaveRoom = () => {
 		this.socket.emit('leaveRoom', this.props.room)
-		this.props.changeView('RoomList')
+		this.props.changeView('Menu')
 	}
 
 	render() {

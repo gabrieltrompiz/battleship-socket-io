@@ -42,7 +42,7 @@ export default class Cell extends React.Component {
                     {isLeft && <span style={styleLeft}>{this.props.coord.charAt(0)}</span>}
                     {!this.props.disabled &&
                     <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}
-                    onClick={() => this.shoot()}>
+                    className='shootable' onClick={() => this.shoot()}>
                     </div>}
                     {this.props.disabled &&
                     <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}></div>}
