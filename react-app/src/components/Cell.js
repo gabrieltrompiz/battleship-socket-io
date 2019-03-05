@@ -13,7 +13,7 @@ export default class Cell extends React.Component {
         table[row - 1][this.props.coord] = true;
         this.props.changeTable(table)
         this.socket.emit('fire', this.props.room, this.props.coord);
-		this.props.disabled = true;
+		//this.props.disabled = true;
     };
 
     render() {

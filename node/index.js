@@ -14,7 +14,7 @@ io.on('connection', socket => {
     socket.on('joinRoom', room => {
         if(rooms.hasOwnProperty(room)) { // if room exists
             if(rooms[room].length < 2) { // if room doesn't have two players already
-				io.in(room).emit('initGame');
+            	io.in(room).emit('initGame');
                 socket.join(room);
                 rooms = io.sockets.adapter.rooms;
                 io.in(room).emit('roomUpdate', rooms[room]);
@@ -39,7 +39,9 @@ io.on('connection', socket => {
     });
 
     socket.on('fire', (room, coord) => {
-        socket.in(room).emit('fire', coord)
+    	socket.emit('setTurn', false);
+        socket.in(room).emit('fire', coord);
+		socket.in(room).emit('setTurn', true);
     });
 
     socket.on('chat message', (room, message) => {
