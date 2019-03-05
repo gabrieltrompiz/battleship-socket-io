@@ -17,6 +17,7 @@ io.on('connection', socket => {
                 socket.join(room);
                 rooms = io.sockets.adapter.rooms;
                 io.in(room).emit('roomUpdate', rooms[room])
+                io.emit('returnRooms', rooms)
             }
             else console.log('errorJoining', "Room full. Wait until game is finished.");
             
@@ -31,6 +32,7 @@ io.on('connection', socket => {
             socket.emit('roomCreated', roomvar);
             rooms = io.sockets.adapter.rooms;
             roomvar++;
+            io.emit('returnRooms', rooms)
         }
         else socket.emit('errorCreating', 'Room already exists');
     });
@@ -48,9 +50,10 @@ io.on('connection', socket => {
     })
 
     socket.on('leaveRoom', room => {
-        console.log('user leaving room: ' + room)
         socket.leave(room)
+        rooms = io.sockets.adapter.rooms
         io.in(room).emit('roomUpdate', rooms[room])
+        io.emit('returnRooms', rooms)
     })
 
     socket.on('disconnect', () => {

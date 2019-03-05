@@ -14,6 +14,10 @@ export default class RoomInfo extends React.Component {
 		this.socket.emit('getRoomInfo', this.props.room)
 	}
 
+	leaveRoom = () => {
+		this.socket.emit('leaveRoom', this.props.room)
+		this.props.changeView('RoomList')
+	}
 
 	render() {
 		return(
@@ -21,7 +25,7 @@ export default class RoomInfo extends React.Component {
 				<p>Room ID: {this.props.room}</p>
 				<p># of Spectators: 0</p>
 				<p>Players: {this.state.roomInfo.length}/2</p>
-				<button className='tableBtn'>Leave Room</button>
+				<button className='tableBtn' onClick={this.leaveRoom}>Leave Room</button>
 			</div>
 			);
 	}
