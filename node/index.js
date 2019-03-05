@@ -44,9 +44,13 @@ io.on('connection', socket => {
     })
 
     socket.on('getRoomInfo', room => {
-        console.log(room)
-        console.log(rooms[room])
         socket.emit('getRoomInfo', rooms[room])
+    })
+
+    socket.on('leaveRoom', room => {
+        console.log('user leaving room: ' + room)
+        socket.leave(room)
+        io.in(room).emit('roomUpdate', rooms[room])
     })
 
     socket.on('disconnect', () => {

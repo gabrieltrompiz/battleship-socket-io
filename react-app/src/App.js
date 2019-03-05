@@ -14,6 +14,17 @@ class App extends Component {
         this.rooms = {};
     }
 
+    setupBeforeUnloadListener = () => {
+        window.addEventListener("beforeunload", (ev) => {
+            ev.preventDefault();
+            return socket.emit('leaveRoom', this.state.activeRoom);
+        });
+    };
+
+    componentDidMount = () => {
+        this.setupBeforeUnloadListener()
+    }
+
     roomRequest = () => {
         socket.emit('getRooms');
         socket.on('returnRooms', rooms => {
