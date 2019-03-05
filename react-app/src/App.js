@@ -37,8 +37,9 @@ class App extends Component {
 					roomList.push(json)
 				}
 			})
-			this.setState({ rooms: roomList, view: 'RoomList' })
+			this.setState({ rooms: roomList })
         });
+        this.setState({ view: 'RoomList' })
     };
 
     changeView = view => {
