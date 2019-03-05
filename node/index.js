@@ -37,11 +37,11 @@ io.on('connection', socket => {
 
     socket.on('fire', (room, coord) => {
         socket.in(room).emit('fire', coord)
-    })
+    });
 
     socket.on('chat message', (room, message) => {
         socket.in(room).emit('chat message', message)
-    })
+    });
 
     socket.on('getRoomInfo', room => {
         socket.emit('getRoomInfo', rooms[room])
@@ -56,6 +56,10 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         console.log('User disconnected')
         socket.leaveAll();
-    })
+    });
+
+    socket.on('leaveRoom', (room) => {
+    	socket.leave(room);
+    });
 });
 

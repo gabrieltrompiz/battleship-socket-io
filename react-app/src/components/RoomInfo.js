@@ -14,6 +14,7 @@ export default class RoomInfo extends React.Component {
 		this.socket.emit('getRoomInfo', this.props.room)
 	}
 
+
 	render() {
 		return(
 			<div id='roomInfo'>
