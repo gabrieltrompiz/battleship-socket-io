@@ -35,7 +35,7 @@ export default class RoomList extends React.Component {
 									<td>0</td>
 									<td>
 										<button onClick={() => this.joinRoom(key)} className='tableBtn' 
-										style={{color: full ? 'red' : 'green', cursor: full ? 'auto' : 'pointer' }} disabled={full}>JOIN</button>
+										style={{color: full ? 'red' : 'green', cursor: full ? 'auto' : 'pointer' }} disabled={full}>{full ? 'ROOM FULL' : 'JOIN'}</button>
 									</td>
 									<td>
 										<button onClick={() => console.log('spectate')} className='tableBtn'>SPECTATE</button> {/* FIXME: spectate method */}

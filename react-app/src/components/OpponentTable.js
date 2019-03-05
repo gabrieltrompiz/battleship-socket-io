@@ -8,6 +8,10 @@ export default class OpponentTable extends React.Component {
         this.socket = this.props.socket
     }
 
+    changeTable = table => {
+        this.setState({ shotTable: table })
+    }
+
     render() {
         return(
             <div style={{ marginLeft: '1vw' }}>
@@ -17,7 +21,8 @@ export default class OpponentTable extends React.Component {
                     return (
                     <div key={this.state.shotTable.indexOf(row)}>
                         {Object.keys(row).map(key => {
-                            return <Cell coord={key} shot={row[key]} key={key + ' opponent'} own socket={this.props.socket} room={this.props.room}/>
+                            return (<Cell coord={key} shot={row[key]} key={key + ' opponent'} own changeTable={this.changeTable}
+                            socket={this.props.socket} room={this.props.room} shotTable={this.state.shotTable}/>)
                         })}
                     </div>)
                 })}  

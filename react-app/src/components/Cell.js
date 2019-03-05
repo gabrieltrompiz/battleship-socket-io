@@ -8,6 +8,10 @@ export default class Cell extends React.Component {
     }
 
     shoot = () => {
+        const table = [...this.props.shotTable]
+        const row = parseInt(this.props.coord.substring(1), 10)
+        table[row -1][this.props.coord] = true;
+        this.props.changeTable(table)
         this.socket.emit('fire', this.props.room, this.props.coord)
     }
 
