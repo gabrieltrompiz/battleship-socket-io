@@ -8,14 +8,19 @@ import RoomInfo from '../components/RoomInfo';
 export default class Game extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = { turn: false};
+		this.props.socket.on('initGame', () => {
+			this.setState({turn: true});
+			console.log('culo');
+		});
+
 	}
 
 	render() {
 		return(
 			<div id='gameTables'>
 				<PlayerTable socket={this.props.socket} room={this.props.room}/>
-				<OpponentTable socket={this.props.socket} room={this.props.room}/>
+				<OpponentTable socket={this.props.socket} room={this.props.room} disabled={!this.state.turn}/>
 
 				<Chat socket={this.props.socket} room={this.props.room}/>
 				<RoomInfo socket={this.props.socket} room={this.props.room} changeView={this.props.changeView}/>

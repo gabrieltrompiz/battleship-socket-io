@@ -9,10 +9,10 @@ export default class RoomList extends React.Component {
 	}
 
 	joinRoom = room => {
-		this.socket.emit('joinRoom', parseInt(room, 10))
-		this.props.setActiveRoom(parseInt(room, 10))
-		this.props.changeView('Game')
-	}
+		this.socket.emit('joinRoom', parseInt(room, 10));
+		this.props.setActiveRoom(parseInt(room, 10));
+		this.props.changeView('Game');
+	};
 
 	render() {
 		return(

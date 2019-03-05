@@ -13,11 +13,12 @@ io.on('connection', socket => {
 
     socket.on('joinRoom', room => {
         if(rooms.hasOwnProperty(room)) { // if room exists
-            if(rooms[room].length < 2) { // if room already has two players
+            if(rooms[room].length < 2) { // if room doesn't have two players already
+				io.in(room).emit('initGame');
                 socket.join(room);
                 rooms = io.sockets.adapter.rooms;
-                io.in(room).emit('roomUpdate', rooms[room])
-                io.emit('returnRooms', rooms)
+                io.in(room).emit('roomUpdate', rooms[room]);
+                io.emit('returnRooms', rooms);
             }
             else console.log('errorJoining', "Room full. Wait until game is finished.");
             
@@ -27,7 +28,7 @@ io.on('connection', socket => {
 
     socket.on('createRoom', () => {
         if(!rooms.hasOwnProperty(roomvar)) { // if room doesn't exists
-            socket.emit('getRoomInfo', roomvar)
+            socket.emit('getRoomInfo', roomvar);
             socket.join(roomvar);
             socket.emit('roomCreated', roomvar);
             rooms = io.sockets.adapter.rooms;
@@ -47,22 +48,18 @@ io.on('connection', socket => {
 
     socket.on('getRoomInfo', room => {
         socket.emit('getRoomInfo', rooms[room])
-    })
-
-    socket.on('leaveRoom', room => {
-        socket.leave(room)
-        rooms = io.sockets.adapter.rooms
-        io.in(room).emit('roomUpdate', rooms[room])
-        io.emit('returnRooms', rooms)
-    })
-
-    socket.on('disconnect', () => {
-        console.log('User disconnected')
-        socket.leaveAll();
     });
 
-    socket.on('leaveRoom', (room) => {
-    	socket.leave(room);
+    socket.on('leaveRoom', room => {
+        socket.leave(room);
+        rooms = io.sockets.adapter.rooms;
+        io.in(room).emit('roomUpdate', rooms[room]);
+        io.emit('returnRooms', rooms);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+        socket.leaveAll();
     });
 });
 

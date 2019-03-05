@@ -3,17 +3,18 @@ import React from 'react'
 export default class Cell extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
-        this.socket = this.props.socket
+        this.state = {};
+        this.socket = this.props.socket;
     }
 
     shoot = () => {
-        const table = [...this.props.shotTable]
-        const row = parseInt(this.props.coord.substring(1), 10)
-        table[row -1][this.props.coord] = true;
+        const table = [...this.props.shotTable];
+        const row = parseInt(this.props.coord.substring(1), 10);
+        table[row - 1][this.props.coord] = true;
         this.props.changeTable(table)
-        this.socket.emit('fire', this.props.room, this.props.coord)
-    }
+        this.socket.emit('fire', this.props.room, this.props.coord);
+		this.props.disabled = true;
+    };
 
     render() {
         const color = this.props.shot ? 'red' : 'white';
@@ -39,11 +40,11 @@ export default class Cell extends React.Component {
                 {isTop && <p style={styleTop}>{this.props.coord.split(this.props.coord.charAt(0))}</p>}     
                 <div style={{ display: 'flex' }}>
                     {isLeft && <span style={styleLeft}>{this.props.coord.charAt(0)}</span>}
-                    {this.props.own && 
+                    {!this.props.disabled &&
                     <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}
                     onClick={() => this.shoot()}>
                     </div>}
-                    {!this.props.own && 
+                    {this.props.disabled &&
                     <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}></div>}
                 </div>               
             </div>
