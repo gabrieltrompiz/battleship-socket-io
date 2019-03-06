@@ -18,22 +18,17 @@ export default class Game extends React.Component {
 		});
         this.socket.on('ready', ready => {
             this.setState({ ready: ready })
-        })
+        });
 	}
 
-    ready = () => {
-        this.socket.emit('ready', this.props.room, true)
-    }
-
 	render() {
-        console.log(this.state.ready)
 		return(
 			<div id='gameTables'>
 				<PlayerTable socket={this.socket} room={this.props.room}/>
 				<OpponentTable socket={this.socket} room={this.props.room} disabled={!this.state.turn}/>
-                <button onClick={this.ready}>READY</button>
 				<Chat socket={this.socket} room={this.props.room}/>
-				<RoomInfo socket={this.socket} room={this.props.room} changeView={this.props.changeView}/>
+				<RoomInfo socket={this.socket} room={this.props.room} changeView={this.props.changeView}
+				turn={this.state.turn}/>
 			</div>
 		);
 	}

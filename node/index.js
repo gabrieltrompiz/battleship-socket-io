@@ -2,7 +2,7 @@ const app = require('express')();
 const io = require('socket.io').listen(app.listen(8080));
 
 let rooms = {};
-let readyPlayers = {}
+let readyPlayers = {};
 let roomvar = 1000;
 
 io.on('connection', socket => {
@@ -67,16 +67,17 @@ io.on('connection', socket => {
 
     socket.on('isReady', room  => { // Creo q esto no se va a usar pero dejalo ahi mientras tanto (era pa revisar si el oponente ta listo pero creo q no es necesario)
         console.log(readyPlayers[room])
-    })
+    });
 
     socket.on('ready', (room, ready) => {
         let players = 0;
         readyPlayers[room][socket.id] = ready;
         if(Object.keys(readyPlayers[room]).every(key => { players++; return readyPlayers[room][key] }) && players === 2) {
-            socket.in(room).emit('initGame')
+            socket.in(room).emit('initGame');
+            io.in(room).emit('gameStarted');
         }
         socket.emit('ready', ready)
-    })
+    });
 
     socket.on('disconnect', () => {
         console.log('User disconnected');

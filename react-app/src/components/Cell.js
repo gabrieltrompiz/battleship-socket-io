@@ -16,9 +16,6 @@ export default class Cell extends React.Component {
 			this.socket.emit('fire', this.props.room, this.props.coord);
 			this.setState({ shoot: true });
 		}
-
-		else
-			console.log('ya shutiaste sapo');
     };
 
     render() {
@@ -46,8 +43,8 @@ export default class Cell extends React.Component {
                 <div style={{ display: 'flex' }}>
                     {isLeft && <span style={styleLeft}>{this.props.coord.charAt(0)}</span>}
                     {!this.props.disabled &&
-                    <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}
-                    className='shootable' onClick={() => this.shoot()}>
+                    <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid',
+                    cursor: this.state.shoot ? 'auto' : 'pointer' }} className='shootable' onClick={() => this.shoot()}>
                     </div>}
                     {this.props.disabled &&
                     <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}></div>}

@@ -3,7 +3,7 @@ import React from 'react';
 export default class RoomInfo extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { roomInfo: {}, stateMsg: 'Press when you\'re ready', playing: false };
+		this.state = { roomInfo: {}, playing: false };
 		this.socket = this.props.socket;
 		this.socket.on('roomUpdate', room => {
 			this.setState({ roomInfo: room });
@@ -12,6 +12,9 @@ export default class RoomInfo extends React.Component {
 			this.setState({ roomInfo: roomInfo });
 		});
 		this.socket.emit('getRoomInfo', this.props.room);
+		this.socket.on('gameStarted', () => {
+			this.setState({ playing: true });
+		});
 	}
 
 	leaveRoom = () => {
@@ -19,10 +22,9 @@ export default class RoomInfo extends React.Component {
 		this.props.changeView('Menu')
 	}
 
-	setReady = () => {
-		this.socket.emit('playerReady');
-		if(this.state.roomInfo.length === 1) this.setState({stateMsg: 'Waiting for Opponent'});
-	};
+	setReady = (ready) => {
+		this.socket.emit('ready', this.props.room, ready)
+	}
 
 	render() {
 		return(
@@ -32,8 +34,14 @@ export default class RoomInfo extends React.Component {
 				<p>Players: {this.state.roomInfo.length}/2</p>
 				<button className='tableBtn' onClick={this.leaveRoom}>Leave Room</button>
 				<div id='readyDiv'>
-					<button id='readyBtn' onClick={() => this.setReady()}>READY</button>
-					<p id='readyLabel'>{this.state.stateMsg}</p>
+					{!this.state.playing &&
+					<button id='readyBtn' onClick={() => this.setReady(true)}>READY</button>}
+					{!this.state.playing &&
+					<p id='readyLabel'>Press when you're ready</p>}
+					{(this.props.turn && this.state.playing) &&
+					<p id='readyLabel'>Your turn</p>}
+					{(!this.props.turn && this.state.playing) &&
+					<p id='readyLabel'>Opponent's turn</p>}
 				</div>
 			</div>
 			);
