@@ -73,7 +73,7 @@ io.on('connection', socket => {
         let players = 0;
         readyPlayers[room][socket.id] = ready;
         if(Object.keys(readyPlayers[room]).every(key => { players++; return readyPlayers[room][key] }) && players === 2) {
-            io.in(room).emit('initGame')
+            socket.in(room).emit('initGame')
         }
         socket.emit('ready', ready)
     })
