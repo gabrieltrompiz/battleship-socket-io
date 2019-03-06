@@ -3,7 +3,7 @@ import React from 'react'
 export default class Chat extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { message: '', messageList: [] }
+        this.state = { selected: 'chat', message: '', messageList: [] }
         this.socket = this.props.socket
     }
 
@@ -37,20 +37,21 @@ export default class Chat extends React.Component {
     render() {
         return(
             <div id='chat'>
-                <p style={style}>CHAT</p>
-                <ul id="messages">
-                    {this.state.messageList.map(value => {
-                        return <li key={this.state.messageList.indexOf(value)}>{value}</li>
-                    })}
-                </ul>
+                <div style={{ paddingTop: 10, paddingBottom: 10 }}>
+                    <button id='chatBtn'>CHAT</button>
+                    <button id='logBtn'>LOG</button>
+                </div>       
+                {this.state.selected === 'chat' &&
+                <div>
+                     <ul id="messages">
+                        {this.state.messageList.map(value => {
+                            return <li key={this.state.messageList.indexOf(value)}>{value}</li>
+                        })}
+                    </ul>
+                </div>}
                 <input autoComplete="off" value={this.state.message} onChange={this.handleChange} onKeyPress={this.handleKey}/>
-                <button onClick={this.sendMessage}>SEND</button>
+                <button onClick={this.sendMessage} id='sendBtn'>SEND</button>
             </div>
         );
     }
-}
-
-const style = {
-    fontFamily: "'Press Start 2P', cursive",
-    textAlign: 'center'
 }

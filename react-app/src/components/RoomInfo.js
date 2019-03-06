@@ -35,9 +35,10 @@ export default class RoomInfo extends React.Component {
 				<button className='tableBtn' onClick={this.leaveRoom}>Leave Room</button>
 				<div id='readyDiv'>
 					{!this.state.playing &&
-					<button id='readyBtn' onClick={() => this.setReady(true)}>READY</button>}
+					<button id='readyBtn' style={{ backgroundColor: this.props.ready ? 'red' : 'green' }} 
+					onClick={() => this.setReady(!this.props.ready)}>{this.props.ready ? 'NOT READY' : 'READY'}</button>}
 					{!this.state.playing &&
-					<p id='readyLabel'>Press when you're ready</p>}
+					<p id='readyLabel'>{!this.props.ready ? 'Press when you\'re ready' : 'Waiting for opponent to be ready...'}</p>}
 					{(this.props.turn && this.state.playing) &&
 					<p id='readyLabel'>Your turn</p>}
 					{(!this.props.turn && this.state.playing) &&

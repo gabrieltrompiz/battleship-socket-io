@@ -103,7 +103,7 @@ td {
 	height: 3vh;
 }
 
-#chat button {
+#sendBtn {
 	width: 4vw;
 	font-family: 'Press Start 2P', cursive;
 	background-color: transparent;
@@ -121,6 +121,7 @@ td {
 	height: 76vh;
 	overflow-y: auto;
 	word-wrap: break-word;
+	margin: 0
 }
 
 #chat li {
@@ -206,7 +207,7 @@ li {
 	background-color: white;
 	position: absolute;
 	width: 36vw;
-	height: 19vh;
+	height: 20vh;
 	top: 78vh;
 	left: 3vw;
 	border-radius: 1vw;
@@ -253,4 +254,24 @@ li {
 	font-family: 'Press Start 2P';
 	width: 20vw;
 	color: rgb(255, 230, 20);
+}
+
+#chatBtn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.3vw;
+    text-align: center;
+    width: 50%;
+    height: inherit;
+    background-color: transparent;
+    border: none;
+}
+
+#logBtn {
+	font-family: 'Press Start 2P', cursive;
+    font-size: 1.3vw;
+    text-align: center;
+    width: 50%;
+    height: inherit;
+    background-color: transparent;
+    border: none;
 }
