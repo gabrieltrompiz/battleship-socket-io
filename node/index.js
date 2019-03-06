@@ -45,10 +45,12 @@ io.on('connection', socket => {
     	socket.emit('setTurn', false);
         socket.in(room).emit('fire', coord);
 		socket.in(room).emit('setTurn', true);
+		io.in(room).emit('resetTimer');
     });
 
     socket.on('setTurn', room => {
     	socket.in(room).emit('setTurn', true);
+    	io.in(room).emit('resetTimer');
 	});
 
     socket.on('chat message', (room, message) => {

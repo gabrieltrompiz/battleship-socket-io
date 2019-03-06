@@ -12,27 +12,27 @@ export default class RoomInfo extends React.Component {
 			this.setState({ roomInfo: roomInfo });
 		});
 		this.socket.emit('getRoomInfo', this.props.room);
+
 		this.socket.on('gameStarted', () => {
 			this.setState({ playing: true }, () => this.tick());
 		});
+
 		this.socket.on('resetTimer', () => {
-			this.setState({ timer: 4 })
+			this.setState({ time: 4 })
 		})
 	}
 
 	tick = () => {
 		this.interval = setInterval(() => {
 			if(this.state.time > 0) {
-				this.setState((prevState, props) => ({ time: prevState.time - 1 }))
-			}
-			else {
+				this.setState(() => ({ time: this.state.time - 1 }))
+			} else {
 				if(this.props.turn) {
-					this.props.changeTurn();
+					this.props.setTurn();
 				}
-				this.setState({ time: 4 })
 			}
 		}, 1000);		
-	}
+	};
 
 	leaveRoom = () => {
 		this.socket.emit('leaveRoom', this.props.room);
