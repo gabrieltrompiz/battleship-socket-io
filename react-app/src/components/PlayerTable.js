@@ -17,6 +17,10 @@ export default class PlayerTable extends React.Component {
         })
     }
 
+    componentWillUnmount = () => {
+        this.setState({ shotTable: shotTable })
+    }
+
     render() {
         return(
             <div>

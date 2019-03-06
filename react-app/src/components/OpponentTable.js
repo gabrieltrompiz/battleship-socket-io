@@ -12,6 +12,10 @@ export default class OpponentTable extends React.Component {
         this.setState({ shotTable: table })
     }
 
+    componentWillUnmount = () => {
+        this.setState({ shotTable: shotTable })
+    }
+
     render() {
         return(
             <div style={{ marginLeft: '1vw' }}>

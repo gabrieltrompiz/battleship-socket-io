@@ -3,7 +3,7 @@ import React from 'react'
 export default class Chat extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { selected: 'chat', message: '', messageList: [] }
+        this.state = { selected: 'chat', message: '', messageList: [], logList: [] }
         this.socket = this.props.socket
     }
 
@@ -37,14 +37,24 @@ export default class Chat extends React.Component {
     render() {
         return(
             <div id='chat'>
-                <div style={{ paddingTop: 10, paddingBottom: 10 }}>
-                    <button id='chatBtn'>CHAT</button>
-                    <button id='logBtn'>LOG</button>
+                <div style={{ height: '6vh'}}>
+                    <button id='chatBtn' style={{ backgroundColor: this.state.selected === 'chat' ? '#eaeaea' : 'transparent' }}
+                    onClick={() => this.setState({ selected: 'chat' })}>CHAT</button>
+                    <button id='logBtn' style={{ backgroundColor: this.state.selected === 'log' ? '#eaeaea' : 'transparent' }}
+                    onClick={() => this.setState({ selected: 'log' })}>LOG</button>
                 </div>       
                 {this.state.selected === 'chat' &&
                 <div>
                      <ul id="messages">
                         {this.state.messageList.map(value => {
+                            return <li key={this.state.messageList.indexOf(value)}>{value}</li>
+                        })}
+                    </ul>
+                </div>}
+                {this.state.selected === 'log' && 
+                <div>
+                    <ul id="messages">
+                        {this.state.logList.map(value => {
                             return <li key={this.state.messageList.indexOf(value)}>{value}</li>
                         })}
                     </ul>

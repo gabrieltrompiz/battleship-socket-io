@@ -118,10 +118,11 @@ td {
 
 #chat ul {
 	background-color: #eaeaea;
-	height: 76vh;
+	height: 78vh;
 	overflow-y: auto;
 	word-wrap: break-word;
-	margin: 0
+	margin-top: 0;
+	margin-bottom: 10;
 }
 
 #chat li {
@@ -259,9 +260,11 @@ li {
     font-size: 1.3vw;
     text-align: center;
     width: 50%;
-    height: inherit;
+    height: 100%;
     background-color: transparent;
     border: none;
+	height: 100%;
+	border-top-left-radius: 1.5vh;
 }
 
 #logBtn {
@@ -272,4 +275,13 @@ li {
     height: inherit;
     background-color: transparent;
     border: none;
+	height: 100%;
+}
+
+#chatBtn:focus {
+	outline: none
+}
+
+#logBtn:focus {
+	outline: none
 }
