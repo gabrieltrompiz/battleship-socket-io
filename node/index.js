@@ -47,6 +47,10 @@ io.on('connection', socket => {
 		socket.in(room).emit('setTurn', true);
     });
 
+    socket.on('setTurn', room => {
+    	socket.in(room).emit('setTurn', true);
+	});
+
     socket.on('chat message', (room, message) => {
         socket.in(room).emit('chat message', message)
     });

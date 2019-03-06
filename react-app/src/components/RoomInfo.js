@@ -3,7 +3,7 @@ import React from 'react';
 export default class RoomInfo extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { roomInfo: {}, playing: false };
+		this.state = { roomInfo: {}, playing: false, time: '15' };
 		this.socket = this.props.socket;
 		this.socket.on('roomUpdate', room => {
 			this.setState({ roomInfo: room });
@@ -18,13 +18,27 @@ export default class RoomInfo extends React.Component {
 	}
 
 	leaveRoom = () => {
-		this.socket.emit('leaveRoom', this.props.room)
+		this.socket.emit('leaveRoom', this.props.room);
 		this.props.changeView('Menu')
-	}
+	};
 
 	setReady = (ready) => {
 		this.socket.emit('ready', this.props.room, ready)
-	}
+	};
+
+	timing = () => {
+		let interval = setInterval(() => {
+			if(this.state.time > 0) {
+				this.state.time--;
+				return this.state.time;
+			}
+			else {
+				this.props.setTurn('false');
+				this.socket.emit('setTurn', this.props.room);
+				clearInterval(interval);
+			}
+		}, 1000);
+	};
 
 	render() {
 		return(
@@ -37,6 +51,8 @@ export default class RoomInfo extends React.Component {
 					{!this.state.playing &&
 					<button id='readyBtn' style={{ backgroundColor: this.props.ready ? 'red' : 'green' }} 
 					onClick={() => this.setReady(!this.props.ready)}>{this.props.ready ? 'NOT READY' : 'READY'}</button>}
+					{this.state.playing &&
+					<p id='readyLabel'>{this.timing()}</p>}
 					{!this.state.playing &&
 					<p id='readyLabel'>{!this.props.ready ? 'Press when you\'re ready' : 'Waiting for opponent to be ready...'}</p>}
 					{(this.props.turn && this.state.playing) &&

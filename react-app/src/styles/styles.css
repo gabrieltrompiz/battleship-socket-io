@@ -158,7 +158,6 @@ td {
 }
 
 #help {
-	position: absolute;
 	width: 75vw;
 	top: 4vh;
 	left: 2.5vw;
@@ -186,7 +185,6 @@ td {
 }
 
 #helpBtn {
-	position: absolute;
 	top: 80vh;
 	left: 42vw;
 	width: 80px;
@@ -194,7 +192,7 @@ td {
 	color: red;
 	cursor: pointer;
 	font-family: 'Press Start 2P';
-	font-size: 1.1vw;
+	font-size: 2vw;
 	border: none;
 	background-color: transparent;
 }

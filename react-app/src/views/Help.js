@@ -41,13 +41,6 @@ export default class Help extends React.Component {
 						<li>Destroyer, which occupies 2 cells</li>
 					</ul>
 				</div>
-				
-				<div id='helpImgCtn'>
-					<img className='hImg' id='img1' src='../assets/bg.png'></img>
-					<img className='hImg' id='img2' src='../assets/bg.png'></img>
-					<img className='hImg' id='img3' src='../assets/bg.png'></img>
-				</div>
-
 				<button id='helpBtn' onClick={() => this.props.changeView('Menu')}>Back</button>
 			</div>
 		);
