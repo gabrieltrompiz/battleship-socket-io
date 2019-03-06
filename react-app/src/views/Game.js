@@ -10,8 +10,11 @@ export default class Game extends React.Component {
 		super(props);
 		this.state = { turn: false};
 		this.props.socket.on('initGame', () => {
-			this.setState({ turn: true });
-			console.log('culo');
+			this.setState({turn: true});
+		});
+
+		this.props.socket.on('setTurn', (turn) => {
+			this.setState({ turn: turn })
 		});
 
 	}
