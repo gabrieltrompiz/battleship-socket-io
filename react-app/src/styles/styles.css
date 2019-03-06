@@ -205,13 +205,52 @@ li {
 #roomInfo {
 	background-color: white;
 	position: absolute;
-	width: 22vw;
+	width: 36vw;
 	height: 19vh;
 	top: 78vh;
 	left: 3vw;
 	border-radius: 1vw;
 	font-family: 'Press Start 2P';
 	font-size: 1.1vw;
+	text-align: left;
+	padding-left: 1vw;
+}
+
+#readyDiv {
+	position: absolute;
+	left: 58%;
+	top: 0;
+	height: inherit;
+	width: 40%;
 	text-align: center;
 }
 
+#readyBtn {
+	width: 14vw;
+	height: 8vh;
+	margin-top: 2.5vh;
+	border: none;
+	background-color: green;
+	color: white;
+	border-radius: 1vw;
+	font-family: 'Press Start 2P';
+	font-size: 1.2vw;
+	cursor: pointer;
+}
+
+#readyLabel {
+	font-size: 1vw;
+	width: 100%;
+	border: none;
+	margin-top: 2vh;
+}
+
+#timer {
+	position: absolute;
+	margin-top: 4vh;
+	left: 22.5vw;
+	font-size: 1.3vw;
+	font-family: 'Press Start 2P';
+	width: 20vw;
+	color: rgb(255, 230, 20);
+}
