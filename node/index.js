@@ -1,7 +1,8 @@
 const app = require('express')();
 const io = require('socket.io').listen(app.listen(8080));
 
-let rooms = [];
+let rooms = {};
+let readyPlayers = {}
 let roomvar = 1000;
 
 io.on('connection', socket => {
@@ -14,9 +15,9 @@ io.on('connection', socket => {
     socket.on('joinRoom', room => {
         if(rooms.hasOwnProperty(room)) { // if room exists
             if(rooms[room].length < 2) { // if room doesn't have two players already
-            	io.in(room).emit('initGame');
                 socket.join(room);
                 rooms = io.sockets.adapter.rooms;
+                readyPlayers[room][socket.id] = false;
                 io.in(room).emit('roomUpdate', rooms[room]);
                 io.emit('returnRooms', rooms);
             }
@@ -32,8 +33,10 @@ io.on('connection', socket => {
             socket.join(roomvar);
             socket.emit('roomCreated', roomvar);
             rooms = io.sockets.adapter.rooms;
+            readyPlayers[roomvar] = {}
+            readyPlayers[roomvar][socket.id] = false;
             roomvar++;
-            io.emit('returnRooms', rooms)
+            io.emit('returnRooms', rooms);
         }
         else socket.emit('errorCreating', 'Room already exists');
     });
@@ -55,9 +58,25 @@ io.on('connection', socket => {
     socket.on('leaveRoom', room => {
         socket.leave(room);
         rooms = io.sockets.adapter.rooms;
+        if(typeof rooms[room] === 'undefined') { // if room is empty delete it from readyPlayers object
+            delete readyPlayers[room]
+        }
         io.in(room).emit('roomUpdate', rooms[room]);
         io.emit('returnRooms', rooms);
     });
+
+    socket.on('isReady', room  => { // Creo q esto no se va a usar pero dejalo ahi mientras tanto (era pa revisar si el oponente ta listo pero creo q no es necesario)
+        console.log(readyPlayers[room])
+    })
+
+    socket.on('ready', (room, ready) => {
+        let players = 0;
+        readyPlayers[room][socket.id] = ready;
+        if(Object.keys(readyPlayers[room]).every(key => { players++; return readyPlayers[room][key] }) && players === 2) {
+            io.in(room).emit('initGame')
+        }
+        socket.emit('ready', ready)
+    })
 
     socket.on('disconnect', () => {
         console.log('User disconnected');

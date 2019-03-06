@@ -8,25 +8,32 @@ import RoomInfo from '../components/RoomInfo';
 export default class Game extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { turn: false};
-		this.props.socket.on('initGame', () => {
-			this.setState({turn: true});
+		this.state = { turn: false, ready: false };
+        this.socket = this.props.socket
+		this.socket.on('initGame', () => {
+			this.setState({ turn: true });
 		});
-
-		this.props.socket.on('setTurn', (turn) => {
+		this.socket.on('setTurn', (turn) => {
 			this.setState({ turn: turn })
 		});
-
+        this.socket.on('ready', ready => {
+            this.setState({ ready: ready })
+        })
 	}
 
+    ready = () => {
+        this.socket.emit('ready', this.props.room, true)
+    }
+
 	render() {
+        console.log(this.state.ready)
 		return(
 			<div id='gameTables'>
-				<PlayerTable socket={this.props.socket} room={this.props.room}/>
-				<OpponentTable socket={this.props.socket} room={this.props.room} disabled={!this.state.turn}/>
-
-				<Chat socket={this.props.socket} room={this.props.room}/>
-				<RoomInfo socket={this.props.socket} room={this.props.room} changeView={this.props.changeView}/>
+				<PlayerTable socket={this.socket} room={this.props.room}/>
+				<OpponentTable socket={this.socket} room={this.props.room} disabled={!this.state.turn}/>
+                <button onClick={this.ready}>READY</button>
+				<Chat socket={this.socket} room={this.props.room}/>
+				<RoomInfo socket={this.socket} room={this.props.room} changeView={this.props.changeView}/>
 			</div>
 		);
 	}
