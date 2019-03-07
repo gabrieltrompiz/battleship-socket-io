@@ -1,3 +1,9 @@
+@font-face {
+	font-family: 'Press Start 2P';
+	font-style: cursive;
+	src: url('..//assets/PressStart2P.ttf')
+}
+
 .menuBtn {
 	width: 33.4vw;
 	height: 10vh;
@@ -208,12 +214,43 @@ li {
 	width: 36vw;
 	height: 20vh;
 	top: 78vh;
-	left: 3vw;
+	left: 1vw;
 	border-radius: 1vw;
 	font-family: 'Press Start 2P';
 	font-size: 1.1vw;
 	text-align: left;
 	padding-left: 1vw;
+}
+
+#controls {
+	background-color: white;
+	position: absolute;
+	width: 28vw;
+	height: 20vh;
+	top: 78vh;
+	left: 39vw;
+	border-radius: 1vw;
+	font-family: 'Press Start 2P';
+	font-size: 1.1vw;
+	text-align: left;
+	padding-left: 1vw;
+	text-align: center;
+}
+
+#controls button {
+	font-family: 'Press Start 2P', cursive;
+	border: none;
+	background-color: transparent;
+	margin-top: 1.6vh;
+	font-size: 0.8vw;
+}
+
+#controls button:hover {
+	cursor: pointer;
+}
+
+#controls button:focus {
+	outline: none;
 }
 
 #readyDiv {
@@ -284,4 +321,12 @@ li {
 
 #logBtn:focus {
 	outline: none
+}
+
+#invertBtn {
+	-moz-transform: scale(1, -1);
+	-webkit-transform: scale(1, -1);
+	-o-transform: scale(1, -1);
+	-ms-transform: scale(1, -1);
+	transform: scale(1, -1);
 }

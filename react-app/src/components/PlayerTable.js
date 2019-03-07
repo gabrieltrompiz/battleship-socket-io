@@ -6,15 +6,15 @@ export default class PlayerTable extends React.Component {
         super(props)
         this.state = { shotTable: shotTable }
         this.socket = this.props.socket
-    }
-
-    componentDidMount = () => {
         this.socket.on('fire', coord => {
             const table = [...this.state.shotTable]
             const row = parseInt(coord.substring(1), 10)
             table[row -1][coord] = true;
             this.setState({ shotTable: table })
         })
+    }
+
+    componentDidMount = () => {
     }
 
     componentWillUnmount = () => {
@@ -26,11 +26,12 @@ export default class PlayerTable extends React.Component {
             <div>
                 <p style={style}>YOU</p>
                 <div className='gameDiv' id='dp1'>
-                {this.state.shotTable.map(row => {
+                {this.state.shotTable.map((row, index) => {
                     return (
                     <div key={this.state.shotTable.indexOf(row)}>
                         {Object.keys(row).map(key => {
-                            return <Cell coord={key} shot={row[key]} key={key + ' player'} disabled/>
+                            return (<Cell coord={key} shot={row[key]} key={key + ' player'} disabled ship={this.props.shipTable[index][key]} 
+                            selected={this.props.shipTable[index][key] === this.props.shipSelected}/>)
                         })}
                     </div>)
                 })}

@@ -27,7 +27,7 @@ export default class OpponentTable extends React.Component {
                         {Object.keys(row).map(key => {
                             return (<Cell coord={key} shot={row[key]} key={key + ' opponent'} changeTable={this.changeTable}
                             socket={this.props.socket} room={this.props.room} shotTable={this.state.shotTable}
-							disabled={this.props.disabled}/>)
+							disabled={this.props.disabled} ship='none'/>)
                         })}
                     </div>)
                 })}  
