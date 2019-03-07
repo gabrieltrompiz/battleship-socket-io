@@ -18,7 +18,7 @@ export default class Game extends React.Component {
 			this.setState({ turn: turn })
 		});
         this.socket.on('ready', ready => {
-            this.setState({ ready: ready })
+            this.setState({ ready: ready, shipSelected: 'none' })
         });
 	}
 
