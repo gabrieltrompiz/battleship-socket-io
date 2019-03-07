@@ -2,37 +2,43 @@ import React from 'react'
 
 export default class Chat extends React.Component {
     constructor(props) {
-        super(props)
-        this.state = { selected: 'chat', message: '', messageList: [], logList: [] }
+        super(props);
+        this.state = { selected: 'chat', message: '', messageList: [], logList: [] };
         this.socket = this.props.socket
     }
 
     componentDidMount = () => {
         this.socket.on('chat message', message => {
             const fixedMessage = <span><span style={{ color: 'red' }}>OPPONENT: </span>{message}</span>
-            const joined = this.state.messageList.concat(fixedMessage)
-            this.setState({ messageList: joined })
-        })
-    }
+            const joined = this.state.messageList.concat(fixedMessage);
+            this.setState({ messageList: joined });
+        });
+
+        this.socket.on('logFire', (coord, player) => {
+        	const fixedLog = <span>{this.props.turn ? 'Opponent':'You'} shoot at: {coord}</span>;
+        	const joined = this.state.logList.concat(fixedLog);
+        	this.setState({ logList: joined });
+		});
+    };
 
     handleChange = (e) => {
         this.setState({ message: e.target.value })
-    }
+    };
 
     sendMessage = e => {
         if(this.state.message !== '') {
-            const message = <span><span style={{ color: 'blue' }}>YOU: </span>{this.state.message}</span>
-            const joined = this.state.messageList.concat(message)
+            const message = <span><span style={{ color: 'blue' }}>YOU: </span>{this.state.message}</span>;
+            const joined = this.state.messageList.concat(message);
             this.socket.emit('chat message', this.props.room, this.state.message);
             this.setState({ message: '', messageList: joined })
         }
-    }
+    };
 
     handleKey = e => {
         if(e.key === 'Enter') {
             this.sendMessage(e)
         }
-    }
+    };
 
     render() {
         return(

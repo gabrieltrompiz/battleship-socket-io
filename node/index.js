@@ -46,6 +46,7 @@ io.on('connection', socket => {
         socket.in(room).emit('fire', coord);
 		socket.in(room).emit('setTurn', true);
 		io.in(room).emit('resetTimer');
+		io.in(room).emit('logFire', coord);
     });
 
     socket.on('setTurn', room => {

@@ -9,7 +9,7 @@ export default class Game extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { turn: false, ready: false };
-        this.socket = this.props.socket
+        this.socket = this.props.socket;
 		this.socket.on('initGame', () => {
 			this.setState({ turn: true });
 		});
@@ -31,7 +31,7 @@ export default class Game extends React.Component {
 			<div id='gameTables'>
 				<PlayerTable socket={this.socket} room={this.props.room}/>
 				<OpponentTable socket={this.socket} room={this.props.room} disabled={!this.state.turn}/>
-				<Chat socket={this.socket} room={this.props.room}/>
+				<Chat socket={this.socket} room={this.props.room} turn={this.state.turn}/>
 				<RoomInfo socket={this.socket} room={this.props.room} changeView={this.props.changeView}
 				turn={this.state.turn} ready={this.state.ready} setTurn={this.setTurnFalse}/>
 			</div>
