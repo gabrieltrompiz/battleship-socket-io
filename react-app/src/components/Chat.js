@@ -15,7 +15,7 @@ export default class Chat extends React.Component {
         });
 
         this.socket.on('logFire', (coord, player) => {
-        	const fixedLog = <span>{this.props.turn ? 'Opponent':'You'} shoot at: {coord}</span>;
+        	const fixedLog = <span>{this.props.turn ? 'Opponent':'You'} shot at: {coord}</span>;
         	const joined = this.state.logList.concat(fixedLog);
         	this.setState({ logList: joined });
 		});

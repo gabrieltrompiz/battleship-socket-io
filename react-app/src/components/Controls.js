@@ -13,7 +13,7 @@ export default class Controls extends React.Component {
             const nextPosition = []
             let nextTable = [...this.props.shipTable]
             if(forbidden.every(cell => {
-                return nextTable[9][cell] !== this.props.selected
+                return !initialPos.includes(cell)
             })) {
                 initialPos.forEach(position => {
                     const nextLetter = position.charAt(0) === 'J' ? 'J' : String.fromCharCode(position.charCodeAt(0) + 1)
@@ -40,7 +40,7 @@ export default class Controls extends React.Component {
             const nextPosition = []
             let nextTable = [...this.props.shipTable]
             if(forbidden.every(cell => {
-                return nextTable[0][cell] !== this.props.selected
+                return !initialPos.includes(cell)
             })) {
                 initialPos.forEach(position => {
                     const nextLetter = String.fromCharCode(position.charCodeAt(0) - 1)
@@ -66,10 +66,8 @@ export default class Controls extends React.Component {
             const initialPos = [...this.state[this.props.selected]]
             const nextPosition = []
             let nextTable = [...this.props.shipTable]
-            if(nextTable.every((row, index) => {
-                return forbidden.every(forbiddenCell => {
-                    return row[forbiddenCell] !== this.props.selected
-                })
+            if(forbidden.every(cell => {
+                return !initialPos.includes(cell)
             })) {
                  initialPos.forEach(position => {
                     const nextNumber = parseInt(position.substring(1), 10) - 1
@@ -95,10 +93,8 @@ export default class Controls extends React.Component {
             const initialPos = [...this.state[this.props.selected]]
             const nextPosition = []
             let nextTable = [...this.props.shipTable]
-            if(nextTable.every((row, index) => {
-                return forbidden.every(forbiddenCell => {
-                    return row[forbiddenCell] !== this.props.selected
-                })
+            if(forbidden.every(cell => {
+                return !initialPos.includes(cell)
             })) {
                  initialPos.forEach(position => {
                     const nextNumber = parseInt(position.substring(1), 10) + 1
@@ -118,8 +114,83 @@ export default class Controls extends React.Component {
         }
     }
 
+    changeRotation = () => {
+        if(this.props.selected !== 'none') {
+            let nextTable = [...this.props.shipTable]
+            let initialPos = [...this.state[this.props.selected]]
+            const horizontal = initialPos[0].charAt(0) === initialPos[1].charAt(0)
+            const vertical = initialPos[0].substring(1) === initialPos[1].substring(1)
+            const nextPosition = []
+            const size = this.state[this.props.selected].length
+            let rotable = false;
+            if(horizontal) {
+                const forbidden = []
+                let letters = String.fromCharCode('K'.charCodeAt(0) - size + 1)
+                while(letters.charCodeAt(0) !== 'K'.charCodeAt(0)) {
+                    forbidden.push(letters)
+                    letters = String.fromCharCode(letters.charCodeAt(0) + 1)
+                }
+                if(forbidden.every(cell => {
+                    return !initialPos[0].startsWith(cell)
+                })){
+                    rotable = true
+                    const firstRow = parseInt(initialPos[0].substring(1), 10) - 1
+                    nextTable[firstRow][initialPos[0]] = 'none'
+                    nextPosition.push(initialPos[0])
+                    initialPos = initialPos.slice(1, initialPos.length)
+                    initialPos.forEach((position, index) => {
+                        let nextLetter = position.charAt(0)
+                        let nextNumber = parseInt(position.substring(1), 10)
+                        for(let i = index; i >= 0; i--) {
+                            nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1)
+                            nextNumber--
+                        }
+                        nextPosition.push(nextLetter + nextNumber)
+                        const row = parseInt(position.substring(1), 10) - 1
+                        nextTable[row][position] = 'none'
+                    })
+                }
+            }
+            if(vertical) {
+                const forbidden = []
+                let numbers = 12 - size
+                while(numbers !== 11) {
+                    forbidden.push(numbers)
+                    numbers++
+                }
+                if(forbidden.every(cell => {
+                    return parseInt(initialPos[0].substring(1), 10) !== cell
+                })) {
+                    rotable = true
+                    const firstRow = parseInt(initialPos[0].substring(1), 10) - 1
+                    nextTable[firstRow][initialPos[0]] = 'none'
+                    nextPosition.push(initialPos[0])
+                    initialPos = initialPos.slice(1, initialPos.length)
+                    initialPos.forEach((position, index) => {
+                        let nextLetter = position.charAt(0)
+                        let nextNumber = parseInt(position.substring(1), 10)
+                        for(let i = index; i >= 0; i--) {
+                            nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) - 1)
+                            nextNumber++
+                        }
+                        nextPosition.push(nextLetter + nextNumber)
+                        const row = parseInt(position.substring(1), 10) - 1
+                        nextTable[row][position] = 'none'
+                    })
+                }
+            }
+            if(nextPosition.every(position => { return nextTable[parseInt(position.substring(1), 10) - 1][position] === 'none' }) && rotable) {
+                nextPosition.forEach(position => {
+                    const index = parseInt(position.substring(1), 10) - 1
+                    nextTable[index][position] = this.props.selected
+                })
+                this.setState({ [this.props.selected]: nextPosition })
+                this.props.setShipTable(nextTable)
+            }
+        }
+    }
+
     render() {
-        console.log(this.state)
         return(
             <div id='controls' style={{ display: this.props.hidden ? 'none' : 'flex' }}>
                 <div style={{ width: '50%' }}>
@@ -134,7 +205,7 @@ export default class Controls extends React.Component {
                     <button style={{ fontSize: '0.8vw', fontWeight: '900' }} onClick={this.moveLeft}>{'<'}</button>
                     <button style={{ fontSize: '0.8vw', fontWeight: '900', marginLeft: '2vw' }} onClick={this.moveRight}>{'>'}</button><br />
                     <button style={{ fontSize: '0.8vw', fontWeight: '900', transform: 'rotate(270deg)' }} onClick={this.moveDown}>{'<'}</button><br />
-                    <button style={{ fontSize: '0.9vw' }}>Change Rotation</button>
+                    <button style={{ fontSize: '0.9vw' }} onClick={this.changeRotation}>Change Rotation</button>
                 </div>
             </div>
         );
