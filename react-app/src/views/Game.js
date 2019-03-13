@@ -19,7 +19,8 @@ export default class Game extends React.Component {
             this.setState({ ready: ready, shipSelected: 'none' })
         });
 
-        this.socket.on('endOfGame', () => {
+        this.socket.on('endOfGame', (win) => {
+        	//console.log('Ganaste: ' + win);
         	//Aja cuando se termine el juego xd
 		});
 	}

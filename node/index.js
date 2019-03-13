@@ -49,14 +49,14 @@ io.on('connection', socket => {
 
     socket.on('shoot', (room, coord, shoot, hundido) => {
 		socket.in(room).emit('shoot', coord, shoot, hundido, true);
-		io.in(room).emit('shoot', coord, shoot, hundido, false);
+    	socket.emit('shoot', coord, shoot, hundido, false);
 		//Aquí son los mismos parámetros pero al final se le agrega un boolean para saber quién disparó
 		//Btw, aquí shoot pasa a boolean, porque se supone que el coño no sabe a que le dio xd
 	});
 
     socket.on('endOfGame', (room) => {
-    	socket.in(room).emit('endOfGame', false);
-    	io.in(room).emit('endOfGame', true);
+    	socket.emit('endOfGame', false);
+    	socket.in(room).emit('endOfGame', true);
     	//El boolean es para indicar si ganó o no
 	});
 
