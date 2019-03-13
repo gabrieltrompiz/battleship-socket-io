@@ -4,22 +4,60 @@ import Cell from './Cell'
 export default class PlayerTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { shotTable: shotTable };
+        this.state = { shotTable: shotTable, carrier: 5, battleship: 4, cruiser: 3, submarine: 3, destroyer: 2, total: 17 };
         this.socket = this.props.socket;
         this.socket.on('fire', coord => {
+        	let hundido = false;
             const table = [...this.state.shotTable];
             const row = parseInt(coord.substring(1), 10);
             table[row -1][coord] = true;
             this.setState({ shotTable: table });
 
-			this.socket.emit('shoot', this.props.room, coord, this.props.shipTable[row - 1][coord], false);
+            switch(this.props.shipTable[row - 1][coord]) {
+				case 'none':
+					break;
+
+				case 'carrier':
+					this.setState({ carrier: this.state.carrier - 1, total: this.state.total - 1 });
+					if(this.state.carrier === 0)
+						hundido = true;
+					break;
+
+				case 'btship':
+					this.setState({ battleship: this.state.battleship - 1, total: this.state.total - 1 });
+					if(this.state.battleship === 0)
+						hundido = true;
+					break;
+
+				case 'cruiser':
+					this.setState({ cruiser: this.state.cruiser - 1, total: this.state.total - 1 });
+					if(this.state.cruiser === 0)
+						hundido = true;
+					break;
+
+				case 'sub':
+					this.setState({ submarine: this.state.submarine - 1, total: this.state.total - 1 });
+					if(this.state.submarine === 0)
+						hundido = true;
+					break;
+
+				case 'destroyer':
+					this.setState({ destroyer: this.state.destroyer - 1, total: this.state.total - 1 });
+					if(this.state.destroyer === 0)
+						hundido = true;
+					break;
+
+				default:
+					throw new Error();
+			}
+
+			this.socket.emit('shoot', this.props.room, coord, this.props.shipTable[row - 1][coord], hundido);
 			//Parámetros: Room, Coordenadas del tiro, Descripción del golpe(a qué le dió) y si fue hundido
+
+			if(this.state.total === 0)
+				this.socket.emit('endOfGame', this.props.room);
         });
     }
-
-    componentDidMount = () => {
-
-    };
 
     componentWillUnmount = () => {
         this.setState({ shotTable: shotTable })
@@ -66,4 +104,4 @@ const shotTable = [
     { A8: false, B8: false, C8: false, D8: false, E8: false, F8: false, G8: false, H8: false, I8: false, J8: false },
     { A9: false, B9: false, C9: false, D9: false, E9: false, F9: false, G9: false, H9: false, I9: false, J9: false },
     { A10: false, B10: false, C10: false, D10: false, E10: false, F10: false, G10: false, H10: false, I10: false, J10: false }
-]
+];

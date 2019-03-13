@@ -18,6 +18,10 @@ export default class Game extends React.Component {
         this.socket.on('ready', ready => {
             this.setState({ ready: ready, shipSelected: 'none' })
         });
+
+        this.socket.on('endOfGame', () => {
+        	//Aja cuando se termine el juego xd
+		});
 	}
 
 	setShipSelected = ship => { 
