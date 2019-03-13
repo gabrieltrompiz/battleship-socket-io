@@ -3,23 +3,27 @@ import Cell from './Cell'
 
 export default class PlayerTable extends React.Component {
     constructor(props) {
-        super(props)
-        this.state = { shotTable: shotTable }
-        this.socket = this.props.socket
+        super(props);
+        this.state = { shotTable: shotTable };
+        this.socket = this.props.socket;
         this.socket.on('fire', coord => {
-            const table = [...this.state.shotTable]
-            const row = parseInt(coord.substring(1), 10)
+            const table = [...this.state.shotTable];
+            const row = parseInt(coord.substring(1), 10);
             table[row -1][coord] = true;
-            this.setState({ shotTable: table })
-        })
+            this.setState({ shotTable: table });
+
+			this.socket.emit('shoot', this.props.room, coord, this.props.shipTable[row - 1][coord], false);
+			//Parámetros: Room, Coordenadas del tiro, Descripción del golpe(a qué le dió) y si fue hundido
+        });
     }
 
     componentDidMount = () => {
-    }
+
+    };
 
     componentWillUnmount = () => {
         this.setState({ shotTable: shotTable })
-    }
+    };
 
     render() {
         return(

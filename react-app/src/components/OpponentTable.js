@@ -3,17 +3,17 @@ import Cell from './Cell'
 
 export default class OpponentTable extends React.Component {
     constructor(props) {
-        super(props)
-        this.state = { shotTable: shotTable }
-        this.socket = this.props.socket
+        super(props);
+        this.state = { shotTable: shotTable };
+        this.socket = this.props.socket;
     }
 
     changeTable = table => {
-        this.setState({ shotTable: table })
+        this.setState({ shotTable: table });
     }
 
     componentWillUnmount = () => {
-        this.setState({ shotTable: shotTable })
+        this.setState({ shotTable: shotTable });
     }
 
     render() {

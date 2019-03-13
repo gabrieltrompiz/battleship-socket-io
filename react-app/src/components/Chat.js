@@ -19,6 +19,14 @@ export default class Chat extends React.Component {
         	const joined = this.state.logList.concat(fixedLog);
         	this.setState({ logList: joined });
 		});
+
+        this.socket.on('shoot', (coord, shoot, hundido, shooter) => {
+        	const fixedLog = <span>{shooter ? 'You' : 'Opponent'} shoot at {coord}
+        	{shoot !== 'none' ? ', and hit something' + (hundido ? ' and he fucked up.': '.') : '.'}</span>;
+			//const fixedLog = <span>{this.props.turn ? 'Opponent':'You'} shoot at: {shoot}</span>;
+			const joined = this.state.logList.concat(fixedLog);
+			this.setState({ logList: joined });
+		});
     };
 
     handleChange = (e) => {

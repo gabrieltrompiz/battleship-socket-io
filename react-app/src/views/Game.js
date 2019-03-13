@@ -14,26 +14,23 @@ export default class Game extends React.Component {
 		this.socket.on('initGame', () => {
 			this.setState({ turn: true });
 		});
-		this.socket.on('setTurn', (turn) => {
-			this.setState({ turn: turn })
-		});
+
         this.socket.on('ready', ready => {
             this.setState({ ready: ready, shipSelected: 'none' })
         });
 	}
 
-	setTurnFalse = () => {
-		this.socket.emit('setTurn', this.props.room);
-		this.setState({ turn: false });
-	};
-
 	setShipSelected = ship => { 
 		this.setState({ shipSelected: ship })
-	}
+	};
 
 	setShipTable = table => {
 		this.setState({ shipTable: table })
-	}
+	};
+
+	setTurn = turn => {
+		this.setState({ turn: turn })
+	};
 
 	render() {
 		return(
@@ -42,7 +39,7 @@ export default class Game extends React.Component {
 				<OpponentTable socket={this.socket} room={this.props.room} disabled={!this.state.turn}/>
 				<Chat socket={this.socket} room={this.props.room} turn={this.state.turn}/>
 				<RoomInfo socket={this.socket} room={this.props.room} changeView={this.props.changeView}
-				turn={this.state.turn} ready={this.state.ready} setTurn={this.setTurnFalse}/>
+				turn={this.state.turn} ready={this.state.ready} setTurn={this.setTurn}/>
 				<Controls hidden={this.state.ready} setShipSelected={this.setShipSelected} shipTable={this.state.shipTable} setShipTable={this.setShipTable}
 				selected={this.state.shipSelected}/>
 			</div>
@@ -61,5 +58,5 @@ const shipTable = [
     { A8: 'none', B8: 'none', C8: 'none', D8: 'none', E8: 'none', F8: 'none', G8: 'none', H8: 'none', I8: 'none', J8: 'none' },
     { A9: 'none', B9: 'none', C9: 'none', D9: 'none', E9: 'none', F9: 'none', G9: 'none', H9: 'none', I9: 'none', J9: 'none' },
     { A10: 'none', B10: 'none', C10: 'none', D10: 'none', E10: 'none', F10: 'none', G10: 'none', H10: 'none', I10: 'none', J10: 'none' }
-]
+];
 
