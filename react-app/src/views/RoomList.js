@@ -5,13 +5,21 @@ export default class RoomList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-		this.socket = this.props.socket
+		this.socket = this.props.socket;
 	}
 
-	joinRoom = room => {
-		this.socket.emit('joinRoom', parseInt(room, 10));
-		this.props.setActiveRoom(parseInt(room, 10));
+	joinRoom = toRoom => {
+		let room = parseInt(toRoom, 10);
+		this.socket.emit('joinRoom', room);
+		this.props.setActiveRoom(room);
 		this.props.changeView('Game');
+	};
+
+	spectateGame = toRoom => {
+		let room = parseInt(toRoom, 10);
+		this.socket.emit('spectate', room);
+		this.props.setActiveRoom(room);
+		this.props.changeView('GameSpectator');
 	};
 
 	render() {
@@ -38,7 +46,7 @@ export default class RoomList extends React.Component {
 										style={{color: full ? 'red' : 'green', cursor: full ? 'auto' : 'pointer' }} disabled={full}>{full ? 'ROOM FULL' : 'JOIN'}</button>
 									</td>
 									<td>
-										<button onClick={() => console.log('spectate')} className='tableBtn'>SPECTATE</button> {/* FIXME: spectate method */}
+										<button onClick={() => this.spectateGame(key)} className='tableBtn'>SPECTATE</button> {/* FIXME: spectate method */}
 									</td>
 								</tr>
 							)
