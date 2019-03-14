@@ -49,8 +49,9 @@ export default class Cell extends React.Component {
                     {this.props.disabled &&
                     <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}>
                         {this.props.ship !== 'none' &&
-                        <div style={{ backgroundColor: '#acabc9', width: '1.7vw', height: '1.7vw', marginTop: this.props.selected ? '0.35vw' : '0.5vw', 
-                        marginLeft: this.props.selected ? '0.35vw' : '0.5vw', border: this.props.selected ? '0.15vw blue dashed' : 'none', opacity: 1 }}></div>}
+                        <div style={{ backgroundColor: '#acabc9', width: '1.7vw', height: '1.7vw', marginTop: this.props.selected ? '0.35vw' : '0.5vw', borderRadius: '100%', 
+                        marginLeft: this.props.selected ? '0.35vw' : '0.5vw', border: this.props.selected ? '0.15vw blue dashed' : 'none', opacity: 1, 
+                        animation: this.props.selected ? 'rotating 2s linear infinite' : 'none' }}></div>}
                     </div>}
                 </div>               
             </div>
