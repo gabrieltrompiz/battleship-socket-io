@@ -2,7 +2,7 @@ import React from 'react'
 
 export default class Controls extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = { carrier: initialCarrierPos, btship: initialBtshipPos, cruiser: initialCruiserPos, sub: initialSubPos, destroyer: initialDestPos }
     }
 

@@ -17,9 +17,10 @@ export default class RoomInfo extends React.Component {
 			this.setState({ playing: true }, () => this.tick());
 		});
 
-		this.socket.on('resetTimer', () => {
-			this.setState({ time: 4 })
-		})
+		this.socket.on('setTurn', turn => {
+			this.setState({ time: 4 });
+			this.props.setTurn(turn);
+		});
 	}
 
 	tick = () => {
@@ -28,7 +29,9 @@ export default class RoomInfo extends React.Component {
 				this.setState(() => ({ time: this.state.time - 1 }))
 			} else {
 				if(this.props.turn) {
-					this.props.setTurn();
+					this.props.setTurn(false);
+					this.socket.emit('setTurn', this.props.room);
+					this.setState({ time: 4 });
 				}
 			}
 		}, 1000);		
@@ -40,7 +43,7 @@ export default class RoomInfo extends React.Component {
 	};
 
 	setReady = (ready) => {
-		this.socket.emit('ready', this.props.room, ready)
+		this.socket.emit('ready', this.props.room, ready);
 	};
 
 	render() {
