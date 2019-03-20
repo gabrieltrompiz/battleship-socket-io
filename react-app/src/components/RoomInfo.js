@@ -3,7 +3,7 @@ import React from 'react';
 export default class RoomInfo extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { roomInfo: {}, playing: false, time: 4 };
+		this.state = { roomInfo: {}, playing: false, time: 1 };
 		this.socket = this.props.socket;
 		this.socket.on('roomUpdate', room => {
 			this.setState({ roomInfo: room });
@@ -18,9 +18,17 @@ export default class RoomInfo extends React.Component {
 		});
 
 		this.socket.on('setTurn', turn => {
-			this.setState({ time: 4 });
+			this.setState({ time: 1 });
 			this.props.setTurn(turn);
 		});
+
+		this.socket.on('endOfGame', () => {
+			this.setState({ playing: false })
+		})
+
+		this.socket.on('opponentLeft', () => {
+			this.setState({ playing: false })
+		})
 	}
 
 	tick = () => {
@@ -31,7 +39,7 @@ export default class RoomInfo extends React.Component {
 				if(this.props.turn) {
 					this.props.setTurn(false);
 					this.socket.emit('setTurn', this.props.room);
-					this.setState({ time: 4 });
+					this.setState({ time: 1 });
 				}
 			}
 		}, 1000);		
@@ -50,7 +58,6 @@ export default class RoomInfo extends React.Component {
 		return(
 			<div id='roomInfo'>
 				<p>Room ID: {this.props.room}</p>
-				<p># of Spectators: 0</p>
 				<p>Players: {this.state.roomInfo.length}/2</p>
 				<button className='tableBtn' onClick={this.leaveRoom}>Leave Room</button>
 				<div id='readyDiv'>

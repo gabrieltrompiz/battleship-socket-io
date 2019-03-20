@@ -76,6 +76,10 @@ io.on('connection', socket => {
     socket.on('leaveRoom', room => {
         socket.leave(room);
         rooms = io.sockets.adapter.rooms;
+        if(rooms.hasOwnProperty(room)) { // if room still exists
+            delete readyPlayers[room][socket.id]
+            io.in(room).emit('opponentLeft')
+        }
         if(typeof rooms[room] === 'undefined') { // if room is empty delete it from readyPlayers object
             delete readyPlayers[room]
         }

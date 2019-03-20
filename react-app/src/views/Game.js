@@ -5,11 +5,12 @@ import '../styles/styles.css';
 import OpponentTable from '../components/OpponentTable';
 import RoomInfo from '../components/RoomInfo';
 import Controls from '../components/Controls'
+import ModalAlert from '../components/ModalAlert';
 
 export default class Game extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { turn: false, ready: false, shipTable: shipTable, shipSelected: 'none' };
+		this.state = { turn: false, ready: false, shipTable: shipTable, shipSelected: 'none', showAlert: false, winMsg: '' };
         this.socket = this.props.socket;
 		this.socket.on('initGame', () => {
 			this.setState({ turn: true });
@@ -20,9 +21,16 @@ export default class Game extends React.Component {
         });
 
         this.socket.on('endOfGame', (win) => {
-        	//console.log('Ganaste: ' + win);
-        	//Aja cuando se termine el juego xd
+        	const message = win ? 'Congratulations, you won!' : 'That\'s too bad, you lost!'
+			this.setState({ turn: false, ready: false, shipTable: shipTable, shipSelected: 'none', showAlert: true, winMsg: message })
+			this.socket.emit('ready', this.props.room, false)
 		});
+
+		this.socket.on('opponentLeft', () => {
+			const message = 'Your opponent left the room, you win by forfeit.'
+			this.setState({ turn: false, ready: false, shipTable: shipTable, shipSelected: 'none', showAlert: true, winMsg: message })
+			this.socket.emit('ready', this.props.room, false)
+		})
 	}
 
 	setShipSelected = ship => { 
@@ -37,6 +45,10 @@ export default class Game extends React.Component {
 		this.setState({ turn: turn })
 	};
 
+	hideModal = () => {
+		this.setState({ showAlert: false })
+	}
+
 	render() {
 		return(
 			<div id='gameTables'>
@@ -47,6 +59,10 @@ export default class Game extends React.Component {
 				turn={this.state.turn} ready={this.state.ready} setTurn={this.setTurn}/>
 				<Controls hidden={this.state.ready} setShipSelected={this.setShipSelected} shipTable={this.state.shipTable} setShipTable={this.setShipTable}
 				selected={this.state.shipSelected}/>
+				{this.state.showAlert && 
+				<ModalAlert hide={this.hideModal}>
+					{this.state.winMsg}
+				</ModalAlert>}
 			</div>
 		);
 	}

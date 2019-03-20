@@ -4,6 +4,11 @@
 	src: url('..//assets/PressStart2P.ttf')
 }
 
+html {
+	-webkit-user-select: none;
+  -moz-user-select: none;
+}
+
 .menuBtn {
 	width: 33.4vw;
 	height: 10vh;
@@ -18,8 +23,6 @@
 	background-color: rgb(70, 70, 70);
 	cursor: pointer;
 	outline: none;
-	-webkit-user-select: none;
-    -moz-user-select: none;
 }
 
 #menuCtn {
@@ -248,6 +251,24 @@ td {
 #controls button:focus {
 	outline: none;
 }
+
+#modalBtn {
+	font-family: 'Press Start 2P', cursive;
+	border: none;
+	color: red;
+	background-color: transparent;
+	margin-bottom:  1.6vh;
+	font-size: 1.3vw;
+}
+
+#modalBtn {
+	cursor: pointer;
+}
+
+#modalBtn {
+	outline: none;
+}
+
 
 #readyDiv {
 	position: absolute;

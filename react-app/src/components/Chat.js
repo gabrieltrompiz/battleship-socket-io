@@ -5,6 +5,12 @@ export default class Chat extends React.Component {
         super(props);
         this.state = { selected: 'chat', message: '', messageList: [], logList: [] };
         this.socket = this.props.socket
+        this.socket.on('endOfGame', () => {
+            this.setState({ messageList: [], logList: [] })
+        })
+        this.socket.on('opponentLeft', () => {
+            this.setState({ messageList: [], logList: [] })
+        })
     }
 
     componentDidMount = () => {
@@ -20,9 +26,9 @@ export default class Chat extends React.Component {
         	this.setState({ logList: joined });
 		});
 
-        this.socket.on('shoot', (coord, shoot, hundido, shooter) => {
-        	const fixedLog = <span>{shooter ? 'You' : 'Opponent'} shoot at {coord}
-        	{shoot !== 'none' ? ', and hit something' + (hundido ? ' and he fucked up.': '.') : '.'}</span>;
+        this.socket.on('shoot', (coord, shoot, sank, shooter) => {
+        	const fixedLog = <span>{shooter ? 'You' : 'Opponent'} shot at {coord} <span style={{ color: shoot === 'none' ? 'blue' : sank ? 'red' : 'orange' }}>
+        	{shoot !== 'none' ? ' and hit a ship' + (sank ? ' and it sank.': '.') : 'and it didn\'t hit anything.'}</span></span>;
 			//const fixedLog = <span>{this.props.turn ? 'Opponent':'You'} shoot at: {shoot}</span>;
 			const joined = this.state.logList.concat(fixedLog);
 			this.setState({ logList: joined });
@@ -69,7 +75,7 @@ export default class Chat extends React.Component {
                 <div>
                     <ul id="messages">
                         {this.state.logList.map(value => {
-                            return <li key={this.state.messageList.indexOf(value)}>{value}</li>
+                            return <li key={this.state.logList.indexOf(value)}>{value}</li>
                         })}
                     </ul>
                 </div>}

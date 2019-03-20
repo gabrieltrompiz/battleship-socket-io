@@ -8,7 +8,7 @@ export default class Cell extends React.Component {
     }
 
     shoot = () => {
-    	if(!this.state.shoot) {
+    	if(!this.props.shot) {
 			const table = [...this.props.shotTable];
 			const row = parseInt(this.props.coord.substring(1), 10);
 			table[row - 1][this.props.coord] = true;
@@ -44,7 +44,7 @@ export default class Cell extends React.Component {
                     {isLeft && <span style={styleLeft}>{this.props.coord.charAt(0)}</span>}
                     {!this.props.disabled &&
                     <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid',
-                    cursor: this.state.shoot ? 'auto' : 'pointer' }} className='shootable' onClick={() => this.shoot()}>
+                    cursor: this.props.shot ? 'auto' : 'pointer' }} className='shootable' onClick={() => this.shoot()}>
                     </div>}
                     {this.props.disabled &&
                     <div style={{ backgroundColor: color, opacity: 0.8, width: '2.7vw', height: '2.7vw', borderWidth: 1, borderColor: 'black', borderStyle: 'solid' }}>

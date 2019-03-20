@@ -3,7 +3,6 @@ import './App.css';
 import Menu from './views/Menu';
 import RoomList from './views/RoomList'
 import Game from './views/Game';
-import GameSpectator from './views/GameSpectator';
 import Help from './views/Help'
 import * as io from 'socket.io-client';
 
@@ -59,9 +58,6 @@ class App extends Component {
 
             case 'Game':
                 return <Game changeView={this.changeView} socket={socket} room={this.state.activeRoom}/>;
-
-            case 'GameSpectator':
-                return <GameSpectator changeView={this.changeView} socket={socket}/>;
 
             case 'Help':
                 return <Help changeView={this.changeView}/>
